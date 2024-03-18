@@ -8,6 +8,7 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 const FilterAccordion = () => {
     return (
         <>
+            {/* --- ACCORDION START --- */}
             <Accordion elevation={3}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -25,23 +26,25 @@ const FilterAccordion = () => {
                         },
                     }}
                 >
-                    <Typography variant="h6" align="center" sx={{ width: "100%" }}>
-                        Brands
-                    </Typography>
+                    <Typography variant="h6">Brands</Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ pt: 0, pb: 0 }}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label="Apple" sx={{ justifyContent: "center" }} />
-                        <FormControlLabel control={<Checkbox />} label="Samsung" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Apple" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Samsung" />
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
-            <Accordion elevation={3}>
+            {/* --- ACCORDION FINISH --- */}
+
+            {/* --- ACCORDION START --- */}
+            <Accordion elevation={3} sx={{ p: "10px 0" }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
                     sx={{
+                        minHeight: 30,
                         "& .MuiAccordionSummary-content": {
                             margin: 0,
                         },
@@ -50,21 +53,33 @@ const FilterAccordion = () => {
                         },
                     }}
                 >
-                    <Typography variant="h6">Series</Typography>
+                    <Typography variant="h6" component="h6">
+                        Series
+                    </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ pt: 0, pb: 0 }}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label="15 Pro Max" />
-                        <FormControlLabel control={<Checkbox />} label="Galaxy S" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="15 Pro Max" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Galaxy S" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="15 Pro Max" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Galaxy S" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="15 Pro Max" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Galaxy S" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="15 Pro Max" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Galaxy S" />
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
-            <Accordion elevation={3}>
+            {/* --- ACCORDION FINISH --- */}
+
+            {/* --- ACCORDION START --- */}
+            <Accordion elevation={3} sx={{ p: "10px 0" }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
                     sx={{
+                        minHeight: 30,
                         "& .MuiAccordionSummary-content": {
                             margin: 0,
                         },
@@ -75,13 +90,22 @@ const FilterAccordion = () => {
                 >
                     <Typography variant="h6">Colors</Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ pt: 0, pb: 0 }}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label="Black" />
-                        <FormControlLabel control={<Checkbox />} label="White" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Black" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="White" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Black" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="White" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Black" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="White" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Black" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="White" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="Black" />
+                        <FormControlLabel control={<Checkbox size="small" />} label="White" />
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
+            {/* --- ACCORDION FINISH --- */}
         </>
     );
 };
