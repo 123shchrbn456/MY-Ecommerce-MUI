@@ -49,6 +49,16 @@ Router.propTypes = {
 };
 
 const theme = createTheme({
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 577,
+            md: 768,
+            lg: 1024,
+            xl: 1200,
+            xxl: 1400,
+        },
+    },
     palette: {
         primary: {
             main: blueGrey[700],
@@ -77,7 +87,7 @@ const theme = createTheme({
         MuiAccordion: {
             styleOverrides: {
                 root: {
-                    borderRadius: "8px",
+                    borderRadius: "4px",
                     marginBottom: "8px",
                     "&:before": { height: "0px" } /* Gray line on top is removed */,
                 },

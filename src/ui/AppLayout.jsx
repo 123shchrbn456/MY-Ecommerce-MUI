@@ -9,7 +9,7 @@ const AppLayout = () => {
             <Header />
             <main>
                 <Box sx={{ bgcolor: "white" }}>
-                    <Container maxWidth="xl">
+                    <Container maxWidth="xxl">
                         <Outlet />
                     </Container>
                 </Box>

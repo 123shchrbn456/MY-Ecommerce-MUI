@@ -8,7 +8,7 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 const FilterAccordion = () => {
     return (
         <>
-            <Accordion>
+            <Accordion elevation={3}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -36,7 +36,7 @@ const FilterAccordion = () => {
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion elevation={3}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -59,7 +59,7 @@ const FilterAccordion = () => {
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion elevation={3}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
