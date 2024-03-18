@@ -7,7 +7,8 @@ import AppLayout from "./ui/AppLayout";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import { blueGrey, deepOrange, yellow } from "@mui/material/colors";
+import { blueGrey, deepOrange, grey, yellow } from "@mui/material/colors";
+import "./index.css";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
@@ -60,16 +61,24 @@ const theme = createTheme({
         },
     },
     palette: {
-        primary: {
-            main: blueGrey[700],
+        /* primary: {
+            // main: grey[700],
+            // dark: grey[900],
+            main: "#7B1FA2",
             dark: blueGrey[800],
-            contrastText: "#fff",
+            // contrastText: "#fff",
+        }, */
+        primary: {
+            main: "#48484e",
         },
         secondary: {
-            main: deepOrange[700],
-            dark: deepOrange[900],
-            contrastText: deepOrange[50],
+            main: "#e0e0e0",
         },
+        // secondary: {
+        //     main: deepOrange[700],
+        //     dark: deepOrange[900],
+        //     contrastText: deepOrange[50],
+        // },
     },
     components: {
         // MUI Link behaviour is changed to RouterLink behaviour

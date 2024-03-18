@@ -5,7 +5,8 @@ import ChevronRight from "@mui/icons-material/ChevronRight";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import { usePopupState, bindHover, bindFocus, bindMenu } from "material-ui-popup-state/hooks";
-import { styled } from "@mui/material";
+import { Box, Paper, styled } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const classes = {
     submenu: {
@@ -55,7 +56,12 @@ function CascadingSubmenu({ title, popupId, ...props }) {
     return (
         <React.Fragment>
             <MenuItem {...bindHover(popupState)} {...bindFocus(popupState)}>
-                <span sx={classes.title}>{title}</span>
+                {/* <span sx={classes.title}>{title}</span> */}
+                {/* My decision to choose to Button */}
+                <Button sx={classes.title} size="small">
+                    {title}
+                </Button>
+
                 <ChevronRight sx={classes.moreArrow} />
             </MenuItem>
             <CascadingMenu
@@ -101,6 +107,7 @@ const CascadingHoverMenus = () => {
 
     return (
         <>
+            {/* --- POPUP1 START --- */}
             <Button
                 variant="contained"
                 {...bindHover(popupState)}
@@ -110,42 +117,92 @@ const CascadingHoverMenus = () => {
                     popupState.close(e);
                 }}
             >
-                Hover to open Menu
+                Smartphones
+                <ArrowDropDownIcon fontSize="medium" />
             </Button>
-
             <CascadingMenu
                 popupState={popupState}
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                 transformOrigin={{ vertical: "top", horizontal: "left" }}
             >
                 {/* <CascadingMenuItem>Tea</CascadingMenuItem> */}
-                <CascadingMenuItem>
-                    <Button to="/tea">Tea</Button>
-                </CascadingMenuItem>
-                {/* <CascadingMenuItem>Cake</CascadingMenuItem> */}
-                <CascadingMenuItem>
-                    <Button to="/cake">Cake</Button>
-                </CascadingMenuItem>
-                <CascadingMenuItem>Death</CascadingMenuItem>
-                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="More Choices">
-                    <Link color="inherit" underline="none" to="/contact">
-                        <CascadingMenuItem>Cheesecake Contact</CascadingMenuItem>
-                    </Link>
+                {/* Submenus */}
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Apple">
+                    <CascadingMenuItem>
+                        <Button to="/smartphones?series=15pro" size="small" className="cascademenu-item">
+                            15 Pro Series
+                        </Button>
+                    </CascadingMenuItem>
 
-                    <CascadingMenuItem>Cheesedeath</CascadingMenuItem>
-                    <CascadingSubmenu popupId="evenMoreChoicesCascadingMenu" title="Even More Choices">
-                        <CascadingMenuItem>Cake (the band)</CascadingMenuItem>
-                        <CascadingMenuItem>Death Metal</CascadingMenuItem>
-                    </CascadingSubmenu>
-                    <CascadingSubmenu popupId="moreBenignChoices" title="More Benign Choices">
-                        <CascadingMenuItem>Salad</CascadingMenuItem>
-                        <CascadingMenuItem>Lobotomy</CascadingMenuItem>
-                    </CascadingSubmenu>
+                    <CascadingMenuItem>
+                        <Button to="/smartphones?series=15" size="small" className="cascademenu-item">
+                            15 Series
+                        </Button>
+                    </CascadingMenuItem>
+
+                    <CascadingMenuItem>
+                        <Button to="/smartphones?series=14pro" size="small" className="cascademenu-item">
+                            14 Pro Series
+                        </Button>
+                    </CascadingMenuItem>
+
+                    {/* <Link color="inherit" underline="none" to="/contact">
+                        <CascadingMenuItem>Cheesecake Contact</CascadingMenuItem>
+                    </Link> */}
+
+                    {/* <CascadingMenuItem>
+                        <Link to="/smartphones?series=14pro" size="small">
+                            14 Pro Series
+                        </Link>
+                    </CascadingMenuItem> */}
+                </CascadingSubmenu>
+                {/* CascadingSubmenu START */}
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu2" title="Samsung">
+                    <CascadingMenuItem>
+                        <Button to="/" size="small" className="cascademenu-item">
+                            Galaxy S Series
+                        </Button>
+                    </CascadingMenuItem>
+
+                    <CascadingMenuItem>
+                        <Button to="/" size="small" className="cascademenu-item">
+                            Galaxy A Series
+                        </Button>
+                    </CascadingMenuItem>
+
+                    <CascadingMenuItem>
+                        <Button to="/" size="small" className="cascademenu-item">
+                            Galaxy Fold Series
+                        </Button>
+                    </CascadingMenuItem>
+                </CascadingSubmenu>
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu3" title="Google">
+                    <CascadingMenuItem>
+                        <Button to="/" size="small" className="cascademenu-item">
+                            Pixel 8 Series
+                        </Button>
+                    </CascadingMenuItem>
+
+                    <CascadingMenuItem>
+                        <Button to="/" size="small" className="cascademenu-item">
+                            Pixel 7 Series
+                        </Button>
+                    </CascadingMenuItem>
+
+                    <CascadingMenuItem>
+                        <Button to="/" size="small" className="cascademenu-item">
+                            Pixel 6 Series
+                        </Button>
+                    </CascadingMenuItem>
                 </CascadingSubmenu>
             </CascadingMenu>
-
-            {/* -------------------- POPUP 2 --------------------------------- */}
-
+            {/* --- POPUP1 FINISH --- */}
+            {/* --- POPUP1 FINISH --- */}
+            {/* --- POPUP1 FINISH --- */}
+            {/* ------------------------------------------------------------------------------ */}
+            {/* --- POPUP2 START --- */}
+            {/* --- POPUP2 START --- */}
+            {/* --- POPUP2 START --- */}
             <Button
                 variant="contained"
                 {...bindHover(popupState2)}
@@ -155,7 +212,8 @@ const CascadingHoverMenus = () => {
                     popupState2.close(e);
                 }}
             >
-                Hover to open Menu2
+                Tablets
+                <ArrowDropDownIcon fontSize="medium" />
             </Button>
 
             <CascadingMenu
@@ -163,10 +221,10 @@ const CascadingHoverMenus = () => {
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                 transformOrigin={{ vertical: "top", horizontal: "left" }}
             >
-                <CascadingMenuItem>Tea2</CascadingMenuItem>
-                <CascadingMenuItem>Cake2</CascadingMenuItem>
-                <CascadingMenuItem>Death2</CascadingMenuItem>
-                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="More Choices2">
+                <CascadingMenuItem>Apple iPad</CascadingMenuItem>
+                <CascadingMenuItem>Samsung</CascadingMenuItem>
+                <CascadingMenuItem>Lenovo</CascadingMenuItem>
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Xiaomi">
                     <CascadingMenuItem>Cheesecake2</CascadingMenuItem>
                     <CascadingMenuItem>Cheesedeath2</CascadingMenuItem>
                     <CascadingSubmenu popupId="evenMoreChoicesCascadingMenu" title="Even More Choices2">
@@ -179,6 +237,7 @@ const CascadingHoverMenus = () => {
                     </CascadingSubmenu>
                 </CascadingSubmenu>
             </CascadingMenu>
+            {/* --- POPUP2 FINISH --- */}
         </>
     );
 };
