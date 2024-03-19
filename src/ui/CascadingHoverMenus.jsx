@@ -5,8 +5,22 @@ import ChevronRight from "@mui/icons-material/ChevronRight";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import { usePopupState, bindHover, bindFocus, bindMenu } from "material-ui-popup-state/hooks";
-import { Box, Paper, styled } from "@mui/material";
+import { Box, Paper, Typography, styled } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
+const BrandButton = styled(Button)(() => ({
+    "&:hover": {
+        "background-color": "transparent",
+    },
+}));
+
+BrandButton.defaultProps = {
+    size: "small",
+};
+
+const SeriesButton = styled(BrandButton)({
+    textTransform: "none",
+});
 
 const classes = {
     submenu: {
@@ -19,10 +33,6 @@ const classes = {
         marginRight: -1,
     },
 };
-
-const CustomizedButton = styled(Button)(() => ({
-    width: 250,
-}));
 
 const CascadingContext = React.createContext({
     parentPopupState: null,
@@ -57,11 +67,8 @@ function CascadingSubmenu({ title, popupId, ...props }) {
         <React.Fragment>
             <MenuItem {...bindHover(popupState)} {...bindFocus(popupState)}>
                 {/* <span sx={classes.title}>{title}</span> */}
-                {/* My decision to choose to Button */}
-                <Button sx={classes.title} size="small">
-                    {title}
-                </Button>
-
+                {/* My decision to switch to Button */}
+                <BrandButton sx={classes.title}>{title}</BrandButton>
                 <ChevronRight sx={classes.moreArrow} />
             </MenuItem>
             <CascadingMenu
@@ -105,6 +112,11 @@ const CascadingHoverMenus = () => {
         variant: "popover2",
     });
 
+    const popupState3 = usePopupState({
+        popupId: "demoMenu3",
+        variant: "popover3",
+    });
+
     return (
         <>
             {/* --- POPUP1 START --- */}
@@ -116,83 +128,51 @@ const CascadingHoverMenus = () => {
                 onClick={(e) => {
                     popupState.close(e);
                 }}
+                endIcon={<ArrowDropDownIcon fontSize="medium" />}
             >
                 Smartphones
-                <ArrowDropDownIcon fontSize="medium" />
             </Button>
             <CascadingMenu
                 popupState={popupState}
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                 transformOrigin={{ vertical: "top", horizontal: "left" }}
             >
-                {/* <CascadingMenuItem>Tea</CascadingMenuItem> */}
                 {/* Submenus */}
                 <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Apple">
                     <CascadingMenuItem>
-                        <Button to="/smartphones?series=15pro" size="small" className="cascademenu-item">
-                            15 Pro Series
-                        </Button>
+                        <SeriesButton to="/smartphones?series=15pro">15 Pro Series</SeriesButton>
                     </CascadingMenuItem>
 
                     <CascadingMenuItem>
-                        <Button to="/smartphones?series=15" size="small" className="cascademenu-item">
-                            15 Series
-                        </Button>
+                        <SeriesButton to="/smartphones?series=15">15 Series</SeriesButton>
                     </CascadingMenuItem>
 
                     <CascadingMenuItem>
-                        <Button to="/smartphones?series=14pro" size="small" className="cascademenu-item">
-                            14 Pro Series
-                        </Button>
+                        <SeriesButton to="/smartphones?series=14pro">14 Pro Series</SeriesButton>
                     </CascadingMenuItem>
-
-                    {/* <Link color="inherit" underline="none" to="/contact">
-                        <CascadingMenuItem>Cheesecake Contact</CascadingMenuItem>
-                    </Link> */}
-
-                    {/* <CascadingMenuItem>
-                        <Link to="/smartphones?series=14pro" size="small">
-                            14 Pro Series
-                        </Link>
-                    </CascadingMenuItem> */}
                 </CascadingSubmenu>
-                {/* CascadingSubmenu START */}
                 <CascadingSubmenu popupId="moreChoicesCascadingMenu2" title="Samsung">
                     <CascadingMenuItem>
-                        <Button to="/" size="small" className="cascademenu-item">
-                            Galaxy S Series
-                        </Button>
+                        <SeriesButton to="/">Galaxy S Series</SeriesButton>
                     </CascadingMenuItem>
 
                     <CascadingMenuItem>
-                        <Button to="/" size="small" className="cascademenu-item">
-                            Galaxy A Series
-                        </Button>
+                        <SeriesButton to="/">Galaxy A Series</SeriesButton>
                     </CascadingMenuItem>
 
                     <CascadingMenuItem>
-                        <Button to="/" size="small" className="cascademenu-item">
-                            Galaxy Fold Series
-                        </Button>
+                        <SeriesButton to="/">Galaxy Fold Series</SeriesButton>
                     </CascadingMenuItem>
                 </CascadingSubmenu>
                 <CascadingSubmenu popupId="moreChoicesCascadingMenu3" title="Google">
                     <CascadingMenuItem>
-                        <Button to="/" size="small" className="cascademenu-item">
-                            Pixel 8 Series
-                        </Button>
+                        <SeriesButton to="/">Pixel 8 Series</SeriesButton>
                     </CascadingMenuItem>
-
                     <CascadingMenuItem>
-                        <Button to="/" size="small" className="cascademenu-item">
-                            Pixel 7 Series
-                        </Button>
+                        <SeriesButton to="/">Pixel 7 Series</SeriesButton>
                     </CascadingMenuItem>
-
                     <CascadingMenuItem>
-                        <Button to="/" size="small" className="cascademenu-item">
-                            Pixel 6 Series
-                        </Button>
+                        <SeriesButton to="/">Pixel 6 Series</SeriesButton>
                     </CascadingMenuItem>
                 </CascadingSubmenu>
             </CascadingMenu>
@@ -211,9 +191,9 @@ const CascadingHoverMenus = () => {
                 onClick={(e) => {
                     popupState2.close(e);
                 }}
+                endIcon={<ArrowDropDownIcon fontSize="medium" />}
             >
                 Tablets
-                <ArrowDropDownIcon fontSize="medium" />
             </Button>
 
             <CascadingMenu
@@ -221,23 +201,73 @@ const CascadingHoverMenus = () => {
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                 transformOrigin={{ vertical: "top", horizontal: "left" }}
             >
-                <CascadingMenuItem>Apple iPad</CascadingMenuItem>
-                <CascadingMenuItem>Samsung</CascadingMenuItem>
-                <CascadingMenuItem>Lenovo</CascadingMenuItem>
-                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Xiaomi">
-                    <CascadingMenuItem>Cheesecake2</CascadingMenuItem>
-                    <CascadingMenuItem>Cheesedeath2</CascadingMenuItem>
-                    <CascadingSubmenu popupId="evenMoreChoicesCascadingMenu" title="Even More Choices2">
-                        <CascadingMenuItem>Cake (the band)2</CascadingMenuItem>
-                        <CascadingMenuItem>Death Metal2</CascadingMenuItem>
-                    </CascadingSubmenu>
-                    <CascadingSubmenu popupId="moreBenignChoices" title="More Benign Choices2">
-                        <CascadingMenuItem>Salad2</CascadingMenuItem>
-                        <CascadingMenuItem>Lobotomy2</CascadingMenuItem>
-                    </CascadingSubmenu>
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Lenovo">
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Tab M</SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Tab P</SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Yoga</SeriesButton>
+                    </CascadingMenuItem>
+                </CascadingSubmenu>
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu2" title="Xiaomi">
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Mi Pad 6</SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Mi Pad 6</SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Mi Pad 5</SeriesButton>
+                    </CascadingMenuItem>
                 </CascadingSubmenu>
             </CascadingMenu>
             {/* --- POPUP2 FINISH --- */}
+
+            {/* --- POPUP3 START --- */}
+            <Button
+                variant="contained"
+                {...bindHover(popupState3)}
+                {...bindFocus(popupState3)}
+                to="/about"
+                onClick={(e) => {
+                    popupState3.close(e);
+                }}
+                endIcon={<ArrowDropDownIcon fontSize="medium" />}
+            >
+                Laptops
+            </Button>
+
+            <CascadingMenu
+                popupState={popupState3}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                transformOrigin={{ vertical: "top", horizontal: "left" }}
+            >
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Lenovo">
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Tab M</SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Tab P</SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Yoga</SeriesButton>
+                    </CascadingMenuItem>
+                </CascadingSubmenu>
+                <CascadingSubmenu popupId="moreChoicesCascadingMenu2" title="Xiaomi">
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">
+                            M<Typography sx={{ textTransform: "lowercase" }}>i</Typography> Pad 6
+                        </SeriesButton>
+                    </CascadingMenuItem>
+                    <CascadingMenuItem>
+                        <SeriesButton to="/smartphones?series=15pro">Mi Pad 5</SeriesButton>
+                    </CascadingMenuItem>
+                </CascadingSubmenu>
+            </CascadingMenu>
+            {/* --- POPUP3 FINISH --- */}
         </>
     );
 };
