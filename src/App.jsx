@@ -85,6 +85,7 @@ const theme = createTheme({
         MuiLink: {
             defaultProps: {
                 component: LinkBehavior,
+                underline: "none",
             },
         },
         // MUI Buttons behaviour is also changed to RouterLink behaviour
