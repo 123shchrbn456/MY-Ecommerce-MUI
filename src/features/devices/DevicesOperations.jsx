@@ -5,6 +5,7 @@ import GridViewIcon from "@mui/icons-material/GridView";
 
 import SortBy from "../../ui/SortBy";
 import FilterMobileAccordionsModal from "../../ui/FilterMobileAccordionsModal";
+import SortByMobile from "../../ui/SortByMobile";
 
 const DevicesOperations = () => {
     const theme = useTheme();
@@ -18,7 +19,7 @@ const DevicesOperations = () => {
         >
             {isThinnerThanLarge && <FilterMobileAccordionsModal />}
             <Box display="flex">
-                <SortBy />
+                {isThinnerThanLarge ? <SortByMobile /> : <SortBy />}
                 <IconButton>
                     <GridOnIcon />
                 </IconButton>

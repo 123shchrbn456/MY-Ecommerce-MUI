@@ -1,11 +1,6 @@
 import * as React from "react";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
+import { List, ListItemButton, ListItemText, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
-import { Box, ListItemIcon } from "@mui/material";
 
 const options = ["Sort By:", "Default", "Price: Low to High", "Price: High to Low", "Title: A - Z", "Title: Z - A"];
 
