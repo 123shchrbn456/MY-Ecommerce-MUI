@@ -7,9 +7,12 @@ import SortBy from "../../ui/SortBy";
 import FilterMobileAccordionsModal from "../../ui/FilterMobileAccordionsModal";
 import SortByMobile from "../../ui/SortByMobile";
 
-const DevicesOperations = () => {
+const DevicesOperations = ({ changeGridHandler }) => {
     const theme = useTheme();
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
+
+    const smallAmountGrid = isThinnerThanLarge ? 12 : 4;
+    const manyAmountGrid = isThinnerThanLarge ? 6 : 3;
 
     return (
         <Grid
@@ -20,11 +23,11 @@ const DevicesOperations = () => {
             {isThinnerThanLarge && <FilterMobileAccordionsModal />}
             <Box display="flex">
                 {isThinnerThanLarge ? <SortByMobile /> : <SortBy />}
-                <IconButton>
-                    <GridOnIcon />
-                </IconButton>
-                <IconButton>
+                <IconButton onClick={() => changeGridHandler(smallAmountGrid)} sx={{ borderRadius: 0 }}>
                     <GridViewIcon />
+                </IconButton>
+                <IconButton onClick={() => changeGridHandler(manyAmountGrid)} sx={{ borderRadius: 0 }}>
+                    <GridOnIcon />
                 </IconButton>
             </Box>
         </Grid>

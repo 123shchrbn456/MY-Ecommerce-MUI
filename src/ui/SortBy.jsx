@@ -2,7 +2,7 @@ import * as React from "react";
 import { List, ListItemButton, ListItemText, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 
-const options = ["Sort By:", "Default", "Price: Low to High", "Price: High to Low", "Title: A - Z", "Title: Z - A"];
+const options = ["Default", "Price: Low to High", "Price: High to Low", "Title: A - Z", "Title: Z - A"];
 
 export default function SimpleListMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,7 +35,7 @@ export default function SimpleListMenu() {
                     <ListItemIcon sx={{ minWidth: 36 }}>
                         <SortIcon />
                     </ListItemIcon>
-                    <ListItemText primary={options[selectedIndex]} />
+                    <ListItemText primary={selectedIndex === 0 ? "Sort By:" : options[selectedIndex]} />
                 </ListItemButton>
             </List>
             <Menu
@@ -49,12 +49,7 @@ export default function SimpleListMenu() {
                 }}
             >
                 {options.map((option, index) => (
-                    <MenuItem
-                        key={option}
-                        disabled={index === 0}
-                        selected={index === selectedIndex}
-                        onClick={(event) => handleMenuItemClick(event, index)}
-                    >
+                    <MenuItem key={option} selected={index === selectedIndex} onClick={(event) => handleMenuItemClick(event, index)}>
                         {option}
                     </MenuItem>
                 ))}

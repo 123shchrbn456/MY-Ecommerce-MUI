@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import DevicesOperations from "./DevicesOperations";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -8,11 +8,17 @@ import iphone14Img from "../../images/wwen_iphone14_q422_productred_pdp_image_po
 import iphone13Img from "../../images/iphone-13-midnight-select-2021.534x728_m_3.jpeg";
 
 const DevicesList = () => {
+    const [grid, setGrid] = useState(3);
+
+    const changeGridHandler = (gridNum) => {
+        setGrid(gridNum);
+    };
+
     return (
         <Grid className="devices-list" item container xs={12} lg={10} spacing={1}>
-            <DevicesOperations />
+            <DevicesOperations changeGridHandler={changeGridHandler} />
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -39,7 +45,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -66,7 +72,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -93,7 +99,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -120,7 +126,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -147,7 +153,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -174,7 +180,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -201,7 +207,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -228,7 +234,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -255,7 +261,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -282,7 +288,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -309,7 +315,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
@@ -336,7 +342,7 @@ const DevicesList = () => {
             {/* --- CARD FINISH --- */}
 
             {/* --- CARD START --- */}
-            <Grid item xs={6} lg={4} xl={3}>
+            <Grid item xs={6} lg={4} xl={grid}>
                 <Card elevation={2} sx={{ p: 2 }}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
