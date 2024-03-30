@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
-const FilterAccordion = () => {
+const FilterAccordions = () => {
     return (
         <>
             {/* --- ACCORDION START --- */}
@@ -110,4 +110,4 @@ const FilterAccordion = () => {
     );
 };
 
-export default FilterAccordion;
+export default FilterAccordions;

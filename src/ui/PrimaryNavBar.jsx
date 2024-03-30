@@ -62,13 +62,8 @@ const PrimaryNavBar = () => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
-
     const handleMenuClose = () => {
         setAnchorEl(null);
-        handleMobileMenuClose();
     };
 
     const menuId = "primary-search-account-menu";
@@ -89,10 +84,10 @@ const PrimaryNavBar = () => {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>
-                <Link>Profile</Link>
+                <Link to="/profile">Profile</Link>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-                <Link>My Orders</Link>
+                <Link to="/my-orders">My Orders</Link>
             </MenuItem>
         </Menu>
     );

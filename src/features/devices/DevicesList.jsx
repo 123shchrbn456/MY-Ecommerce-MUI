@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
+import DevicesOperations from "./DevicesOperations";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import iphone15Img from "../../images/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
@@ -9,6 +10,7 @@ import iphone13Img from "../../images/iphone-13-midnight-select-2021.534x728_m_3
 const DevicesList = () => {
     return (
         <Grid className="devices-list" item container xs={12} lg={10} spacing={1}>
+            <DevicesOperations />
             {/* --- CARD START --- */}
             <Grid item xs={6} lg={4} xl={3}>
                 <Card elevation={2} sx={{ padding: 1 }}>

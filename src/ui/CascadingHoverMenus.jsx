@@ -10,7 +10,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const BrandButton = styled(Button)(() => ({
     "&:hover": {
-        "background-color": "transparent",
+        backgroundColor: "transparent",
     },
 }));
 
