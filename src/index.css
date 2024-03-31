@@ -1,3 +1,4 @@
-/* a.cascademenu-item:hover {
-    background-color: transparent;
-} */
+.my-card-action-area:hover .MuiCardActionArea-focusHighlight {
+    /* Remove gray highlighting on hover */
+    opacity: 0 !important;
+}
