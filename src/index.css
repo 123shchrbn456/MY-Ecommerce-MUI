@@ -11,13 +11,50 @@
 
 .image-gallery-thumbnail.active,
 .image-gallery-thumbnail:focus {
-    /* outline: none; */
-    border: 4px solid rgb(72, 72, 78);
+    border: 4px solid rgb(72, 72, 78) !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
+    .image-gallery-icon:hover {
+        color: rgb(72, 72, 78) !important;
+    }
     .image-gallery-thumbnail:hover {
         /* outline: none; */
-        border: 4px solid rgb(72, 72, 78);
+        border: 4px solid rgb(72, 72, 78) !important;
     }
+}
+
+/* ----- Optimize a size of Image Carousel -----  */
+
+.image-gallery {
+    height: 100% !important;
+}
+
+.image-gallery-content {
+    height: 100% !important;
+}
+
+.image-gallery-slide-wrapper {
+    height: 80% !important;
+}
+
+.image-gallery-thumbnails-wrapper.thumbnails-swipe-horizontal {
+    height: 20% !important;
+}
+
+.image-gallery-swipe {
+    height: 100% !important;
+}
+
+.image-gallery-slides {
+    height: 100% !important;
+}
+
+.image-gallery-slide.image-gallery-center {
+    height: 100%;
+}
+
+.image-gallery-content .image-gallery-slide .image-gallery-image {
+    max-height: calc(100vh - 180px) !important;
+    height: 100% !important;
 }
