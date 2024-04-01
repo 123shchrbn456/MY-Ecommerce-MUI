@@ -10,6 +10,7 @@ import About from "./pages/About";
 import { blueGrey, deepOrange, grey, yellow } from "@mui/material/colors";
 import "./index.css";
 import SingleDevicePage from "./pages/SingleDevicePage";
+import CartPage from "./pages/CartPage";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
@@ -122,7 +123,8 @@ function App() {
                         <Route element={<AppLayout />}>
                             <Route path="/" element={<Home />} />
                             <Route path="/devices/:id" element={<SingleDevicePage />} />
-                            <Route path="/contact" element={<Contact />} />
+                            <Route path="/cart" element={<CartPage />} />
+                            <Route path="/cart" element={<Contact />} />
                             <Route path="/about" element={<About />} />
                         </Route>
                     </Routes>
