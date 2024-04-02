@@ -58,3 +58,19 @@
     max-height: calc(100vh - 180px) !important;
     height: 100% !important;
 }
+
+/* Remove  default styles in input:number */
+
+input[type="number"].my-input-number:focus {
+    outline: none;
+}
+input[type="number"].my-input-number,
+input[type="number"].my-input-number:focus,
+input[type="number"].my-input-number:hover {
+    border: none;
+}
+
+input[type="number"].my-input-number::-webkit-inner-spin-button,
+input[type="number"].my-input-number::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
