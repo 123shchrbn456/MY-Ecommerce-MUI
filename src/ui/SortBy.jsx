@@ -23,7 +23,7 @@ export default function SimpleListMenu() {
 
     return (
         <>
-            <List component="nav" aria-label="Device settings" sx={{ bgcolor: "background.paper" }}>
+            <List component="nav" aria-label="Device settings" /* sx={{ bgcolor: "background.paper" }} */>
                 <ListItemButton
                     id="lock-button"
                     aria-haspopup="listbox"

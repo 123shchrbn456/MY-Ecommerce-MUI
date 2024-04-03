@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import { Link as RouterLink, BrowserRouter, Routes, Route } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { blueGrey, deepOrange, grey, yellow } from "@mui/material/colors";
 import AppLayout from "./ui/AppLayout";
-import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import { blueGrey, deepOrange, grey, yellow } from "@mui/material/colors";
-import "./index.css";
+import HomePage from "./pages/HomePage";
+import DevicesPage from "./pages/DevicesPage";
 import SingleDevicePage from "./pages/SingleDevicePage";
 import CartPage from "./pages/CartPage";
+import "./index.css";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
@@ -76,6 +77,9 @@ const theme = createTheme({
         secondary: {
             main: "#e0e0e0",
         },
+        background: {
+            // paper: "#CFD8DC",
+        },
         // secondary: {
         //     main: deepOrange[700],
         //     dark: deepOrange[900],
@@ -87,7 +91,7 @@ const theme = createTheme({
         MuiLink: {
             defaultProps: {
                 component: LinkBehavior,
-                underline: "none",
+                underline: "hover",
             },
         },
         // MUI Buttons behaviour is also changed to RouterLink behaviour
@@ -121,7 +125,8 @@ function App() {
                 <Router>
                     <Routes>
                         <Route element={<AppLayout />}>
-                            <Route path="/" element={<Home />} />
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/devices" element={<DevicesPage />} />
                             <Route path="/devices/:id" element={<SingleDevicePage />} />
                             <Route path="/cart" element={<CartPage />} />
                             <Route path="/cart" element={<Contact />} />

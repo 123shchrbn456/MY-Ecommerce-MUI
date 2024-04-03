@@ -74,7 +74,7 @@ const SingleDevicePage = () => {
     const theme = useTheme();
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} mt={-2} pb={3}>
             {/* ---Breadcrumb start--- */}
             <Grid item xs={12}>
                 <Stack>

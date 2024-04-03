@@ -14,10 +14,13 @@ import {
 } from "@mui/material";
 import DevicesOperations from "./DevicesOperations";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import BalanceIcon from "@mui/icons-material/Balance";
 
 import iphone15Img from "../../images/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
 import iphone14Img from "../../images/wwen_iphone14_q422_productred_pdp_image_position-1a_1.jpeg";
 import iphone13Img from "../../images/iphone-13-midnight-select-2021.534x728_m_3.jpeg";
+import DeviceItem from "./DeviceItem";
 
 const CardCustomized = styled(Card)({
     "&:hover": {
@@ -38,8 +41,12 @@ const DevicesList = () => {
     };
 
     return (
-        <Grid className="devices-list" item container xs={12} lg={10} spacing={1}>
+        <Grid className="devices-list" item container xs={12} lg={10} spacing={1} pb={3}>
             <DevicesOperations changeGridHandler={changeGridHandler} />
+            <DeviceItem grid={grid} />
+            <DeviceItem grid={grid} />
+            <DeviceItem grid={grid} />
+            <DeviceItem grid={grid} />
             {/* --- CARD START --- */}
             <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
                 <CardCustomized elevation={2} sx={{ p: 2 }}>
@@ -64,9 +71,17 @@ const DevicesList = () => {
                     </CardContent>
                     <CardActions sx={{ p: 1, justifyContent: "space-between" }}>
                         <Button variant="contained">Buy</Button>
-                        <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                        </IconButton>
+                        <div>
+                            <IconButton aria-label="add to favorites">
+                                <FavoriteIcon />
+                            </IconButton>
+                            <IconButton aria-label="add to commparison">
+                                <BalanceIcon />
+                            </IconButton>
+                            <IconButton aria-label="share">
+                                <ShareIcon />
+                            </IconButton>
+                        </div>
                     </CardActions>
                 </CardCustomized>
             </Grid>

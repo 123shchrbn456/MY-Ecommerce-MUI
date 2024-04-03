@@ -98,7 +98,9 @@ const PrimaryNavBar = () => {
                 <Container maxWidth="xxl">
                     <Toolbar disableGutters={true} sx={{ justifyContent: "space-between" }}>
                         <Box sx={{ display: { xs: "none", md: "block" } }}>
-                            <img src={companyLogo} alt="" style={{ height: "40px" }} />
+                            <Link to="/">
+                                <img src={companyLogo} alt="" style={{ height: "40px" }} />
+                            </Link>
                         </Box>
                         <Search>
                             <SearchIconWrapper size="large">

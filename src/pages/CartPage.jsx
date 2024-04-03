@@ -90,7 +90,7 @@ const CartPage = () => {
     const theme = useTheme();
     const isMobileBreakpoint = useMediaQuery(theme.breakpoints.down("sm"));
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} mt={-2}>
             <Grid className="cart-items" item xs={12} lg={8}>
                 {/* ------------------ FIRST CARD START ------------------ */}
                 <CardAdaptive>
@@ -184,35 +184,40 @@ const CartPage = () => {
             {/* ---Order Summary--- */}
             <Grid item xs={12} lg={4}>
                 <Card sx={{ p: 2 }}>
-                    <Typography component="h4" variant="h4" align="center" mb={1}>
+                    <Typography
+                        component={isMobileBreakpoint ? "h6" : "h4"}
+                        variant={isMobileBreakpoint ? "h6" : "h4"}
+                        align="center"
+                        mb={1}
+                    >
                         Order Summary
                     </Typography>
                     <BoxOrderSummary>
-                        <Typography component="h6" variant="h6">
+                        <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500}>
                             Product total:
                         </Typography>
-                        <Typography component="h6" variant="h6">
+                        <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500}>
                             1200$
                         </Typography>
                     </BoxOrderSummary>
                     <BoxOrderSummary>
-                        <Typography component="h6" variant="h6">
+                        <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500}>
                             Shipping:
                         </Typography>
-                        <Typography component="h6" variant="h6" color="error">
+                        <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500} color="error">
                             Free
                         </Typography>
                     </BoxOrderSummary>
                     <Divider />
                     <BoxOrderSummary>
-                        <Typography component="h6" variant="h6">
-                            Total: 1200$
+                        <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500}>
+                            Total:
                         </Typography>
-                        <Typography component="h6" variant="h6">
+                        <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500}>
                             1200$
                         </Typography>
                     </BoxOrderSummary>
-                    <Button variant="contained" sx={{ width: "100%" }}>
+                    <Button variant="contained" fullWidth>
                         Checkout
                     </Button>
                 </Card>

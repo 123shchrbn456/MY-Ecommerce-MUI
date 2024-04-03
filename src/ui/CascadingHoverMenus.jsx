@@ -124,7 +124,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState)}
                 {...bindFocus(popupState)}
-                to="/"
+                to="/devices"
                 onClick={(e) => {
                     popupState.close(e);
                 }}

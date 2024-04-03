@@ -4,7 +4,7 @@ import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import FilterAccordions from "../ui/FilterAccordions";
 import Devices from "../features/devices/Devices";
 
-const Home = () => {
+const DevicesPage = () => {
     const theme = useTheme();
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
 
@@ -19,4 +19,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default DevicesPage;
