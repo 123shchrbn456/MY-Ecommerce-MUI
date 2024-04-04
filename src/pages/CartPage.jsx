@@ -90,7 +90,7 @@ const CartPage = () => {
     const theme = useTheme();
     const isMobileBreakpoint = useMediaQuery(theme.breakpoints.down("sm"));
     return (
-        <Grid container spacing={1} mt={-2}>
+        <Grid container spacing={1} mt={-2} pb={3}>
             <Grid className="cart-items" item xs={12} lg={8}>
                 {/* ------------------ FIRST CARD START ------------------ */}
                 <CardAdaptive>

@@ -12,6 +12,7 @@ import DevicesPage from "./pages/DevicesPage";
 import SingleDevicePage from "./pages/SingleDevicePage";
 import CartPage from "./pages/CartPage";
 import "./index.css";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
@@ -129,7 +130,7 @@ function App() {
                             <Route path="/devices" element={<DevicesPage />} />
                             <Route path="/devices/:id" element={<SingleDevicePage />} />
                             <Route path="/cart" element={<CartPage />} />
-                            <Route path="/cart" element={<Contact />} />
+                            <Route path="/my-orders" element={<MyOrdersPage />} />
                             <Route path="/about" element={<About />} />
                         </Route>
                     </Routes>

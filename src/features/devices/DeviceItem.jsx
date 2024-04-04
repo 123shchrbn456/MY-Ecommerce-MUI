@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    Box,
     Button,
     Card,
     CardActionArea,
@@ -46,28 +47,32 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 } }) => {
                 </CardActionArea>
                 <CardContent sx={{ p: 1, pb: 0 }}>
                     <LinkCustomized to="/devices/123">
-                        <Typography component="h6" variant="subtitle1">
+                        <Typography component="h6" variant="subtitle1" sx={{ textAlign: { xs: "center", sm: "left" } }}>
                             iPhone 14 128GB Black
                         </Typography>
                     </LinkCustomized>
 
-                    <Typography component="h5" variant="h5">
+                    <Typography
+                        component="h5"
+                        variant="h5"
+                        sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" }, textAlign: { xs: "center", sm: "left" } }}
+                    >
                         900 $
                     </Typography>
                 </CardContent>
-                <CardActions sx={{ p: 1, justifyContent: "space-between" }}>
+                <CardActions sx={{ p: 1, justifyContent: { xs: "center", sm: "space-between" }, flexWrap: { xs: "wrap", sm: "no-wrap" } }}>
                     <Button variant="contained">Buy</Button>
-                    <div>
-                        <IconButton aria-label="add to favorites">
+                    <Box mt={1} mb={1}>
+                        <IconButton aria-label="add to favorites" size="small">
                             <FavoriteIcon />
                         </IconButton>
-                        <IconButton aria-label="add to commparison">
+                        <IconButton aria-label="add to commparison" size="small">
                             <BalanceIcon />
                         </IconButton>
-                        <IconButton aria-label="share">
+                        <IconButton aria-label="share" size="small">
                             <ShareIcon />
                         </IconButton>
-                    </div>
+                    </Box>
                 </CardActions>
             </CardCustomized>
         </Grid>

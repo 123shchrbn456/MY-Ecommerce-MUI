@@ -15,11 +15,11 @@ export const FooterTitle = styled(Typography)(() => ({
 
 export const SubscribeTf = styled(TextField)(() => ({
     ".MuiInputLabel-root": {
-        color: "#d1adcc",
+        color: "#fff",
     },
 
     ".MuiInput-root::before": {
-        borderBottom: `1px solid #d1adcc`,
+        borderBottom: `1px solid #fff`,
     },
 }));
 
@@ -30,11 +30,11 @@ export default function Footer() {
                 background: "#333",
                 color: "#fff",
                 p: { xs: 4, md: 6 },
-                fontSize: { xs: "12px", md: "14px" },
+                fontSize: { xs: "12px", md: "16px" },
             }}
         >
             <Grid container spacing={2} justifyContent="center">
-                <Grid item md={6} lg={4}>
+                <Grid item xs={12} md={5}>
                     <FooterTitle variant="body1">About us</FooterTitle>
                     <Typography variant="caption2">
                         Lorem ipsum dolor sit amet cons adipisicing elit sed do eiusm tempor incididunt ut labor et dolore magna aliqua. Ut
@@ -51,17 +51,12 @@ export default function Footer() {
                         <InstagramIcon />
                     </Box>
                 </Grid>
-                <Grid item md={6} lg={2}>
+                <Grid item xs={6} md={2}>
                     <FooterTitle variant="body1">information</FooterTitle>
                     <List>
                         <ListItemText>
                             <Typography lineHeight={2} variant="caption2">
                                 About Us
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                Order Tracking
                             </Typography>
                         </ListItemText>
                         <ListItemText>
@@ -76,39 +71,30 @@ export default function Footer() {
                         </ListItemText>
                     </List>
                 </Grid>
-                <Grid item md={6} lg={2}>
-                    <FooterTitle variant="body1">my account</FooterTitle>
+                <Grid item xs={6} md={2}>
+                    <FooterTitle variant="body1">Help</FooterTitle>
                     <List>
                         <ListItemText>
                             <Typography lineHeight={2} variant="caption2">
-                                Login
+                                FAQ
                             </Typography>
                         </ListItemText>
                         <ListItemText>
                             <Typography lineHeight={2} variant="caption2">
-                                My Cart
+                                Contact
                             </Typography>
                         </ListItemText>
                         <ListItemText>
                             <Typography lineHeight={2} variant="caption2">
-                                My Account
+                                Shipping and Collection
                             </Typography>
                         </ListItemText>
                         <ListItemText>
                             <Typography lineHeight={2} variant="caption2">
-                                Wishlist
+                                Payment Methods
                             </Typography>
                         </ListItemText>
                     </List>
-                </Grid>
-                <Grid item md={6} lg={4}>
-                    <FooterTitle variant="body1">newsletter</FooterTitle>
-                    <Stack>
-                        <SubscribeTf color="primary" label="Email address" variant="standard" />
-                        <Button startIcon={<SendIcon sx={{ color: "#fff" }} />} sx={{ mt: 4, mb: 4 }} variant="contained">
-                            Subscribe
-                        </Button>
-                    </Stack>
                 </Grid>
             </Grid>
         </Box>

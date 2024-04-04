@@ -29,7 +29,7 @@ const HomePage = () => {
                 </Typography>
             </Grid>
             {/* Advertisement Card */}
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <CardCustomized elevation={4} sx={{ p: 3, pb: 0 }}>
                     <CardActionArea className="my-card-action-area" to="/devices/123">
                         <Typography variant="button">Buy</Typography>
@@ -47,7 +47,7 @@ const HomePage = () => {
                 </CardCustomized>
             </Grid>
             {/* Advertisement Card */}
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <CardCustomized elevation={2} sx={{ p: 3, pb: 0 }}>
                     <CardActionArea className="my-card-action-area" to="/devices/123">
                         <Typography variant="button">Buy</Typography>
@@ -107,8 +107,8 @@ const HomePage = () => {
                 </CardCustomized>
             </Grid> */}
             {/* Advertisement Card */}
-            <Grid item xs={6}>
-                <CardCustomized elevation={2} sx={{ p: 3, pb: 0 }}>
+            <Grid item xs={12} md={6}>
+                <CardCustomized elevation={2} sx={{ p: 3 }}>
                     <CardActionArea className="my-card-action-area" to="/devices/123">
                         <Typography variant="button">Buy</Typography>
                         <Typography component="h3" variant="h3">
@@ -124,8 +124,8 @@ const HomePage = () => {
                 </CardCustomized>
             </Grid>
             {/* Advertisement Card */}
-            <Grid item xs={6}>
-                <CardCustomized elevation={2} sx={{ p: 3, pb: 0 }}>
+            <Grid item xs={12} md={6}>
+                <CardCustomized elevation={2} sx={{ p: 3 }}>
                     <CardActionArea className="my-card-action-area" to="/devices/123">
                         <Typography variant="button">Buy</Typography>
                         <Typography component="h3" variant="h3">
