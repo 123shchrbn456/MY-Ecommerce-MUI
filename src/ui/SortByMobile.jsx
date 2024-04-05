@@ -23,7 +23,7 @@ export default function SortByMobile() {
 
     return (
         <>
-            <ListItemButton onClick={toggleDrawer(true)}>
+            <ListItemButton onClick={toggleDrawer(true)} sx={{ width: "100px" }}>
                 <ListItemIcon sx={{ minWidth: 36 }}>
                     <SortIcon />
                 </ListItemIcon>

@@ -16,13 +16,12 @@ const DevicesOperations = ({ changeGridHandler }) => {
     const bigAmountGrid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 };
 
     return (
-        <Grid
-            item
-            xs={12}
-            sx={{ display: "flex", justifyContent: isThinnerThanLarge ? "space-between" : "flex-end", alignItems: "center" }}
-        >
-            {isThinnerThanLarge && <FilterMobileAccordionsModal />}
-            <Box display="flex">
+        <Grid item xs={12}>
+            <Box
+                display="flex"
+                sx={{ display: "flex", justifyContent: isThinnerThanLarge ? "space-between" : "flex-end", alignItems: "center" }}
+            >
+                {isThinnerThanLarge && <FilterMobileAccordionsModal />}
                 {isThinnerThanLarge ? <SortByMobile /> : <SortBy />}
                 {/* <IconButton color={active === 1 && "success"} onClick={() => changeGridHandler(smallAmountGrid)} sx={{ borderRadius: 0 }}> */}
                 <IconButton

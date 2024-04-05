@@ -13,6 +13,8 @@ import SingleDevicePage from "./pages/SingleDevicePage";
 import CartPage from "./pages/CartPage";
 import "./index.css";
 import MyOrdersPage from "./pages/MyOrdersPage";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
@@ -132,6 +134,8 @@ function App() {
                             <Route path="/cart" element={<CartPage />} />
                             <Route path="/my-orders" element={<MyOrdersPage />} />
                             <Route path="/about" element={<About />} />
+                            <Route path="/sign-in" element={<SignInPage />} />
+                            <Route path="/sign-up" element={<SignUpPage />} />
                         </Route>
                     </Routes>
                 </Router>

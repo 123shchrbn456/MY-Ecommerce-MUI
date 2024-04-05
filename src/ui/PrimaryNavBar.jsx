@@ -17,6 +17,7 @@ import {
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LoginIcon from "@mui/icons-material/Login";
 
 import companyLogo from "../images/logo-Meta-removebg-preview.png";
 
@@ -27,7 +28,7 @@ const Search = styled("div")(({ theme }) => ({
     "&:hover": {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
-    width: "50%",
+    width: "40%",
     [theme.breakpoints.down("sm")]: {
         width: "100%",
     },
@@ -45,16 +46,18 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
+    width: "100%",
     "& .MuiInputBase-input": {
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create("width"),
-        width: "100%",
+        // width: "100%",
     },
 }));
 
 const PrimaryNavBar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const isAuthenticated = false;
 
     const isMenuOpen = Boolean(anchorEl);
 
@@ -96,7 +99,7 @@ const PrimaryNavBar = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Container maxWidth="xxl">
-                    <Toolbar disableGutters={true} sx={{ justifyContent: "space-between" }}>
+                    <Toolbar disableGutters={true} sx={{ justifyContent: "space-between", flexWrap: { xs: "wrap", sm: "no-wrap" } }}>
                         <Box sx={{ display: { xs: "none", md: "block" } }}>
                             <Link to="/">
                                 <img src={companyLogo} alt="" style={{ height: "40px" }} />
@@ -108,36 +111,59 @@ const PrimaryNavBar = () => {
                             </SearchIconWrapper>
                             <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
                         </Search>
-                        <Box sx={{ display: "flex" }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                width: { xs: "100%", sm: "auto" },
+                                justifyContent: { xs: "space-evenly", sm: "flex-start" },
+                            }}
+                        >
                             <Button
-                                size="large"
                                 color="inherit"
                                 sx={{
                                     textTransform: "none",
-                                    mr: 1,
+                                    mr: 2,
+                                    fontSize: "1.2rem",
                                 }}
+                                endIcon={
+                                    <Badge badgeContent={4} color="error">
+                                        <ShoppingCartIcon fontSize="medium" />
+                                    </Badge>
+                                }
                                 to="/cart"
                             >
-                                <Typography variant="h6" mr={1}>
-                                    Cart
-                                </Typography>
-                                <Badge badgeContent={4} color="error">
-                                    <ShoppingCartIcon sx={{ fontSize: "30px" }} />
-                                </Badge>
+                                Cart
                             </Button>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
-                                color="inherit"
-                                sx={{
-                                    p: 1,
-                                }}
-                            >
-                                <Avatar alt="Remy Sharp" src="/avatar.jpg" sx={{ width: "50px", height: "50px" }} />
-                            </IconButton>
+                            {isAuthenticated ? (
+                                <IconButton
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-controls={menuId}
+                                    aria-haspopup="true"
+                                    onClick={handleProfileMenuOpen}
+                                    color="inherit"
+                                    sx={{
+                                        p: 1,
+                                    }}
+                                >
+                                    <Avatar alt="Remy Sharp" src="/avatar.jpg" sx={{ width: "50px", height: "50px" }} />
+                                </IconButton>
+                            ) : (
+                                <Button
+                                    size="large"
+                                    color="inherit"
+                                    sx={{
+                                        textTransform: "none",
+                                        mr: 1,
+                                        fontSize: "1.2rem",
+                                    }}
+                                    endIcon={<LoginIcon fontSize="medium" />}
+                                    to="/sign-in"
+                                >
+                                    Sign In
+                                </Button>
+                            )}
+
                             {renderProfileMenu}
                         </Box>
                     </Toolbar>
