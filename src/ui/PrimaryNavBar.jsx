@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const PrimaryNavBar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const isAuthenticated = false;
+    const isAuthenticated = true;
 
     const isMenuOpen = Boolean(anchorEl);
 

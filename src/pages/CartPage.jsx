@@ -13,12 +13,14 @@ import {
     IconButton,
     Link,
     Typography,
+    Stack,
     styled,
     useMediaQuery,
     useTheme,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import iphone15Img from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
 
@@ -91,6 +93,15 @@ const CartPage = () => {
     const isMobileBreakpoint = useMediaQuery(theme.breakpoints.down("sm"));
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
+            <Grid item xs={12}>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                    <IconButton>
+                        <ArrowBackIcon fontSize="large" />
+                    </IconButton>
+                    <Typography variant="h4">Cart</Typography>
+                    <Typography variant="subtitle1">2 items</Typography>
+                </Stack>
+            </Grid>
             <Grid className="cart-items" item xs={12} lg={8}>
                 {/* ------------------ FIRST CARD START ------------------ */}
                 <CardAdaptive>
