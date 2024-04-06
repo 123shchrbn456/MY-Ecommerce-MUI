@@ -17,6 +17,8 @@ const CardCustomized = styled(Card)({
     },
 });
 
+const DEVICE_GRID = { xs: 6, sm: 6, md: 6, lg: 3, xl: 3 };
+
 const HomePage = () => {
     return (
         <Grid container spacing={2} pb={3}>
@@ -65,10 +67,10 @@ const HomePage = () => {
             </Grid>
 
             {/* Popular items */}
-            <DeviceItem />
-            <DeviceItem />
-            <DeviceItem />
-            <DeviceItem />
+            <DeviceItem grid={DEVICE_GRID} />
+            <DeviceItem grid={DEVICE_GRID} />
+            <DeviceItem grid={DEVICE_GRID} />
+            <DeviceItem grid={DEVICE_GRID} />
             {/* <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
                 <CardCustomized elevation={2} sx={{ p: 2 }}>
                     <CardActionArea className="my-card-action-area" to="/devices/123">
@@ -141,10 +143,10 @@ const HomePage = () => {
                 </CardCustomized>
             </Grid>
             {/* Popular items */}
-            <DeviceItem />
-            <DeviceItem />
-            <DeviceItem />
-            <DeviceItem />
+            <DeviceItem grid={DEVICE_GRID} />
+            <DeviceItem grid={DEVICE_GRID} />
+            <DeviceItem grid={DEVICE_GRID} />
+            <DeviceItem grid={DEVICE_GRID} />
             {/* <Grid item xs={12}></Grid> */}
         </Grid>
     );

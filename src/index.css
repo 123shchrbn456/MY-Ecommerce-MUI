@@ -74,3 +74,20 @@ input[type="number"].my-input-number::-webkit-inner-spin-button,
 input[type="number"].my-input-number::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
+
+/* Stick footer to the bottom */
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main.main-content {
+    flex-grow: 1;
+}
+
+/* Remove left margin of icon wrapper box */
+
+.MuiCardActions-root .MuiBox-root {
+    margin-left: 0;
+}

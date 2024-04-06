@@ -8,17 +8,18 @@ const AppLayout = () => {
     return (
         <>
             <Header />
-            <main>
-                <Box
-                    sx={{
-                        background: "linear-gradient(180deg, rgba(241,241,241,1) 0%, rgba(209,209,209,1) 55%)",
-                    }}
-                >
-                    <Container maxWidth="xxl">
-                        <Outlet />
-                    </Container>
-                </Box>
-            </main>
+            <Box
+                component="main"
+                className="main-content"
+                sx={{
+                    paddingTop: 2,
+                    background: "linear-gradient(180deg, rgba(241,241,241,1) 0%, rgba(209,209,209,1) 55%)",
+                }}
+            >
+                <Container maxWidth="xxl">
+                    <Outlet />
+                </Container>
+            </Box>
             <Footer />
         </>
     );

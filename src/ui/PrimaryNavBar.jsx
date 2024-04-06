@@ -31,6 +31,7 @@ const Search = styled("div")(({ theme }) => ({
     width: "40%",
     [theme.breakpoints.down("sm")]: {
         width: "100%",
+        marginTop: 8,
     },
 }));
 
@@ -96,7 +97,7 @@ const PrimaryNavBar = () => {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box>
             <AppBar position="static">
                 <Container maxWidth="xxl">
                     <Toolbar disableGutters={true} sx={{ justifyContent: "space-between", flexWrap: { xs: "wrap", sm: "no-wrap" } }}>

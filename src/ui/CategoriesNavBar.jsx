@@ -8,7 +8,7 @@ const CategoriesNavBar = () => {
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
     return (
         <Box>
-            <Stack direction="row" justifyContent="center" alignItems="center" spacing={1} mb={2} p={1} sx={{ bgcolor: "#D3D3D3" }}>
+            <Stack direction="row" justifyContent="center" alignItems="center" spacing={1} p={1} sx={{ bgcolor: "#D3D3D3" }}>
                 {!isThinnerThanLarge && <CascadingHoverMenus />}
                 {isThinnerThanLarge && <MobileCategoriesList />}
             </Stack>

@@ -15,6 +15,7 @@ import "./index.css";
 import MyOrdersPage from "./pages/MyOrdersPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import Footer from "./ui/Footer";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
@@ -124,22 +125,20 @@ function App() {
     return (
         // <Stack sx={{ typography: "body1" }} alignItems="center" spacing={1}>
         <ThemeProvider theme={theme}>
-            <div className="App">
-                <Router>
-                    <Routes>
-                        <Route element={<AppLayout />}>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/devices" element={<DevicesPage />} />
-                            <Route path="/devices/:id" element={<SingleDevicePage />} />
-                            <Route path="/cart" element={<CartPage />} />
-                            <Route path="/my-orders" element={<MyOrdersPage />} />
-                            <Route path="/about" element={<About />} />
-                            <Route path="/sign-in" element={<SignInPage />} />
-                            <Route path="/sign-up" element={<SignUpPage />} />
-                        </Route>
-                    </Routes>
-                </Router>
-            </div>
+            <Router>
+                <Routes>
+                    <Route element={<AppLayout />}>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/devices" element={<DevicesPage />} />
+                        <Route path="/devices/:id" element={<SingleDevicePage />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/my-orders" element={<MyOrdersPage />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/sign-in" element={<SignInPage />} />
+                        <Route path="/sign-up" element={<SignUpPage />} />
+                    </Route>
+                </Routes>
+            </Router>
         </ThemeProvider>
         // </Stack>
     );

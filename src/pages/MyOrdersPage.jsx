@@ -107,7 +107,7 @@ const MyOrdersPage = () => {
             </Grid>
             <Grid className="cart-items" item xs={12}>
                 {/* ------------------ FIRST ACCORDION START ------------------ */}
-                <Accordion>
+                <Accordion defaultExpanded={false} disableGutters={true} sx={{ bgcolor: "#C0C0C0" }}>
                     <AccordionSummary
                         expandIcon={<ArrowDownwardIcon />}
                         aria-controls="panel1-content"
@@ -151,7 +151,7 @@ const MyOrdersPage = () => {
                             1350$
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={{ p: { xs: "0px 8px", sm: "0px 16px" } }}>
+                    <AccordionDetails sx={{ p: { xs: "0px 8px 12px", sm: "0px 16px 12px" } }}>
                         {/* CardAdaptive First */}
                         <CardAdaptive>
                             {/*  */}
@@ -182,7 +182,7 @@ const MyOrdersPage = () => {
                     </AccordionDetails>
                 </Accordion>
                 {/* ------------------ SECOND ACCORDION START ------------------ */}
-                <Accordion>
+                <Accordion defaultExpanded={false} disableGutters={true} sx={{ bgcolor: "#C0C0C0" }}>
                     <AccordionSummary
                         expandIcon={<ArrowDownwardIcon />}
                         aria-controls="panel1-content"
@@ -226,9 +226,36 @@ const MyOrdersPage = () => {
                             1350$
                         </Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={{ p: { xs: "0px 8px", sm: "0px 16px" } }}>
+                    <AccordionDetails sx={{ p: { xs: "0px 8px 12px", sm: "0px 16px 12px" } }}>
                         {/* CardAdaptive First */}
-                        <CardAdaptive>
+                        <CardAdaptive elevation={2}>
+                            {/*  */}
+                            <CardContentImage>
+                                <CardActionArea className="my-card-action-area" to="/devices/123">
+                                    <CardMedia
+                                        sx={{ height: 50, objectFit: "contain", width: "auto" }}
+                                        image={iphone15Img}
+                                        title="stuff"
+                                        component="img"
+                                    />
+                                </CardActionArea>
+                            </CardContentImage>
+                            {/*  */}
+
+                            <CardContentInfo>
+                                <LinkTitle to="/devices/123" sx={{ fontWeight: 300 }}>
+                                    iPhone 14 128GB Red
+                                </LinkTitle>
+                            </CardContentInfo>
+                            {/*  */}
+                            <CardContentPriceAndCounter>
+                                <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"}>
+                                    900 $
+                                </Typography>
+                            </CardContentPriceAndCounter>
+                        </CardAdaptive>
+                        {/* CardAdaptive Second */}
+                        <CardAdaptive elevation={2}>
                             {/*  */}
                             <CardContentImage>
                                 <CardActionArea className="my-card-action-area" to="/devices/123">

@@ -62,7 +62,7 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 } }) => {
                 </CardContent>
                 <CardActions sx={{ p: 1, justifyContent: { xs: "center", sm: "space-between" }, flexWrap: { xs: "wrap", sm: "no-wrap" } }}>
                     <Button variant="contained">Buy</Button>
-                    <Box mt={1} mb={1}>
+                    <Box mt={1} mb={1} ml={0}>
                         <IconButton aria-label="add to favorites" size="small">
                             <FavoriteIcon />
                         </IconButton>
