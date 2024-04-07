@@ -11,11 +11,11 @@ import HomePage from "./pages/HomePage";
 import DevicesPage from "./pages/DevicesPage";
 import SingleDevicePage from "./pages/SingleDevicePage";
 import CartPage from "./pages/CartPage";
-import "./index.css";
 import MyOrdersPage from "./pages/MyOrdersPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import Footer from "./ui/Footer";
+import "./index.css";
 
 // This way is using "href" prop passed to a Link
 // const LinkBehavior = React.forwardRef((props, ref) => {
