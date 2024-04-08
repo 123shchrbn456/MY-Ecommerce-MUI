@@ -32,23 +32,24 @@ const LinkCustomized = styled(Link)({
     color: "black",
 });
 
-const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 } }) => {
+const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }) => {
     const { xs, sm, md, lg, xl } = grid;
+    const { id, brand, model, color, imgURLs, price, storage } = deviceData;
     return (
         <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
             <CardCustomized elevation={2} sx={{ p: 2 }}>
-                <CardActionArea className="my-card-action-area" to="/devices/123">
+                <CardActionArea className="my-card-action-area" to={`/devices/${id}`}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain", transition: "transform .3s" }}
-                        image={iphone15Img}
-                        title="stuff"
+                        image={imgURLs[0]}
+                        title="avatar"
                         component="img"
                     />
                 </CardActionArea>
                 <CardContent sx={{ p: 1, pb: 0 }}>
                     <LinkCustomized to="/devices/123">
-                        <Typography component="h6" variant="subtitle1" sx={{ textAlign: { xs: "center", sm: "left" } }}>
-                            iPhone 14 128GB Black
+                        <Typography component="h6" variant="subtitle1" noWrap={true} sx={{ textAlign: { xs: "center", sm: "left" } }}>
+                            {brand} {model} {color} {storage}
                         </Typography>
                     </LinkCustomized>
 
@@ -57,7 +58,7 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 } }) => {
                         variant="h5"
                         sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" }, textAlign: { xs: "center", sm: "left" } }}
                     >
-                        900 $
+                        {price} $
                     </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 1, justifyContent: { xs: "center", sm: "space-between" }, flexWrap: { xs: "wrap", sm: "no-wrap" } }}>

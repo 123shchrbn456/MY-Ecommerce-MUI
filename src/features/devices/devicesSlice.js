@@ -1,7 +1,7 @@
 import { generateFilteringData } from "../../utils/helpers";
 import { apiSlice } from "../api/apiSlice";
 import { db } from "../../firebase";
-import { and, collection, getDocs, or, query, where } from "firebase/firestore";
+import { and, collection, endAt, getDocs, limit, or, query, startAt, where } from "firebase/firestore";
 
 export const devicesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -30,6 +30,8 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                         filterDevicesQuery.push(searchKeyQuery);
                     });
 
+                    // const q = query(devicesRef, and(...filterDevicesQuery), limit(9));
+                    // https://firebase.google.com/docs/firestore/query-data/query-cursors
                     const q = query(devicesRef, and(...filterDevicesQuery));
 
                     const querySnap = await getDocs(q);
