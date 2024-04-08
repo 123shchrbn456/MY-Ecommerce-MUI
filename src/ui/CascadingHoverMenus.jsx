@@ -124,7 +124,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState)}
                 {...bindFocus(popupState)}
-                to="/devices"
+                to="/devices?category=smartphones"
                 onClick={(e) => {
                     popupState.close(e);
                 }}
@@ -187,7 +187,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState2)}
                 {...bindFocus(popupState2)}
-                to="/about"
+                to="/devices?category=tablets"
                 onClick={(e) => {
                     popupState2.close(e);
                 }}
@@ -231,7 +231,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState3)}
                 {...bindFocus(popupState3)}
-                to="/about"
+                to="/devices?category=laptops"
                 onClick={(e) => {
                     popupState3.close(e);
                 }}

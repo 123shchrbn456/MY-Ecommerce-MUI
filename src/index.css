@@ -91,3 +91,8 @@ main.main-content {
 .MuiCardActions-root .MuiBox-root {
     margin-left: 0;
 }
+
+/*  Change only first accordion title */
+.my-filter-accordion:first-child .my-filter-accordion__summary {
+    min-height: 48px;
+}
