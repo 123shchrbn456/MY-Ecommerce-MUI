@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Card, Grid, styled, Link } from "@mui/material";
+import { Grid } from "@mui/material";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { PAGE_SIZE } from "../../utils/constants";
 
@@ -88,9 +88,9 @@ const DevicesList = () => {
     }
 
     return (
-        <Grid className="devices-list" item container alignItems="flex-start" xs={12} lg={10} spacing={1} pb={3}>
+        <Grid className="devices-list" item xs={12} lg={10} spacing={1} pb={3}>
             <DevicesOperations changeGridHandler={changeGridHandler} />
-            <Grid item container spacing={1} xs={12}>
+            <Grid container spacing={1} xs={12}>
                 {!isLoading && devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
             </Grid>
         </Grid>
