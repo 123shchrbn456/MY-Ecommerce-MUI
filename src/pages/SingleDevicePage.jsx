@@ -1,42 +1,27 @@
 import React from "react";
+import ImageGallery from "react-image-gallery";
 import {
     Breadcrumbs,
     Button,
     ButtonGroup,
     Card,
-    CardActions,
     CardContent,
-    CardMedia,
     Grid,
     IconButton,
     Link,
-    Paper,
     Stack,
     Typography,
     styled,
     useMediaQuery,
     useTheme,
 } from "@mui/material";
-import ImageGallery from "react-image-gallery";
+
+import { useGetSingleDeviceFromFirebaseQuery } from "../features/devices/devicesSlice";
+import { useParams } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "react-image-gallery/styles/css/image-gallery.css";
-
-import img from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
-import img1 from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
-import img2 from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-1_alt__ww-en_1.jpeg";
-import img3 from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-2__ww-en_1.jpeg";
-import img4 from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-3__ww-en_1.jpeg";
-import img5 from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-4__ww-en_1.jpeg";
-
-const images = [
-    { original: img1, thumbnail: img1 },
-    { original: img2, thumbnail: img2 },
-    { original: img3, thumbnail: img3 },
-    { original: img4, thumbnail: img4 },
-    { original: img5, thumbnail: img5 },
-];
 
 const RoundButton = styled(Button)(({ back }) => ({
     borderRadius: "50%",
@@ -72,20 +57,36 @@ const CardContentCustomized = styled(CardContent)(({ theme, needmobilechange = "
 
 const SingleDevicePage = () => {
     const theme = useTheme();
+    const { id } = useParams();
+
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
+    const { data = {}, isSuccess, isLoading, isError } = useGetSingleDeviceFromFirebaseQuery(id);
+
+    if (isLoading) return <h3>Loading Single Device</h3>;
+
+    const { category, brand, series, model, storage, color, imgURLs, price } = data;
+    const images = imgURLs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
+
+    console.log("SingleDevicePage", data);
+
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
             {/* ---Breadcrumb start--- */}
             <Grid item xs={12}>
                 <Stack>
                     <Breadcrumbs aria-label="breadcrumb">
-                        <Link underline="hover" color="inherit" to="/">
-                            MUI
+                        <Link underline="hover" color="inherit" to={`/devices?category=${category}`}>
+                            {category}
                         </Link>
-                        <Link underline="hover" color="inherit" to="/material-ui/getting-started/installation/">
-                            Core
+                        <Link underline="hover" color="inherit" to={`/devices?category=${category}&brand=${brand}`}>
+                            {brand}
                         </Link>
-                        <Typography color="text.primary">Breadcrumbs</Typography>
+                        <Link underline="hover" color="inherit" to={`/devices?category=${category}&brand=${brand}&series=${series}`}>
+                            {series} series
+                        </Link>
+                        <Typography color="text.primary">
+                            {model} {storage} {color}
+                        </Typography>
                     </Breadcrumbs>
                 </Stack>
             </Grid>
@@ -95,7 +96,8 @@ const SingleDevicePage = () => {
                     <Card elevation={2} sx={{ p: 1, pl: 3, pr: 3, mb: 1 }} square={true}>
                         <CardContentCustomized>
                             <Typography component="h4" variant="h4">
-                                iPhone 14 128GB Red
+                                {model} {storage} {color}
+                                {/* iPhone 14 128GB Red */}
                             </Typography>
                         </CardContentCustomized>
                     </Card>
@@ -117,7 +119,7 @@ const SingleDevicePage = () => {
                         <Card elevation={2} sx={{ p: 1, pl: 3, pr: 3, mb: 1 }} square={true}>
                             <CardContentCustomized>
                                 <Typography component="h4" variant="h4">
-                                    iPhone 14 128GB Red
+                                    {model} {storage} {color}
                                 </Typography>
                             </CardContentCustomized>
                         </Card>
@@ -149,7 +151,7 @@ const SingleDevicePage = () => {
                     <Card elevation={2} sx={{ p: 1, pl: 3, pr: 3, mb: 1 }} square={true}>
                         <CardContentCustomized needmobilechange="false" sx={{ justifyContent: "space-between", gap: 1 }}>
                             <Typography component="h4" variant="h4">
-                                900$
+                                {price}
                             </Typography>
 
                             <div>

@@ -88,9 +88,9 @@ const DevicesList = () => {
     }
 
     return (
-        <Grid className="devices-list" item xs={12} lg={10} spacing={1} pb={3}>
+        <Grid className="devices-list" item xs={12} lg={10} pb={3}>
             <DevicesOperations changeGridHandler={changeGridHandler} />
-            <Grid container spacing={1} xs={12}>
+            <Grid container spacing={1}>
                 {!isLoading && devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
             </Grid>
         </Grid>
