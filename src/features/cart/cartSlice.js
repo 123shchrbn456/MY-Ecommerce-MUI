@@ -86,6 +86,20 @@ const cartSlice = createSlice({
             state.cartItems = newCartItems;
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
+        changeItemAmount: (state, action) => {
+            const { id } = action.payload.cartItem;
+            const newItemAmount = Number(action.payload.inputValue);
+            if (newItemAmount > 99) newItemAmount = 99;
+            if (newItemAmount < 1) newItemAmount = 1;
+
+            const existingItemIndex = state.cartItems.findIndex((item) => item.id === id);
+            // Increase item quantity
+            state.cartItems[existingItemIndex] = {
+                ...state.cartItems[existingItemIndex],
+                quantity: newItemAmount,
+            };
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        },
         clearCartItems: (state, action) => {
             state.cartItems = [];
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -113,6 +127,7 @@ export const selectAllCartItems = (state) => state.cart.cartItems;
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;
 export const selectCartTotalAmount = (state) => state.cart.cartTotalAmount;
 
-export const { addToCart, clearCartItems, decreaseAmountInCart, deleteFromCart, getTotalPriceAndQuantity } = cartSlice.actions;
+export const { addToCart, clearCartItems, decreaseAmountInCart, deleteFromCart, changeItemAmount, getTotalPriceAndQuantity } =
+    cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

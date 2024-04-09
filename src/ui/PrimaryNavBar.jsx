@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
     AppBar,
     Box,
@@ -20,6 +21,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 
 import companyLogo from "../images/logo-Meta-removebg-preview.png";
+import { getTotalPriceAndQuantity, selectAllCartItems, selectCartTotalQuantity } from "../features/cart/cartSlice";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -58,9 +60,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const PrimaryNavBar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const isAuthenticated = true;
+    const dispatch = useDispatch();
 
+    const isAuthenticated = true;
     const isMenuOpen = Boolean(anchorEl);
+
+    const cartItems = useSelector(selectAllCartItems);
+    const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+
+    useEffect(() => {
+        dispatch(getTotalPriceAndQuantity());
+    }, [cartItems]);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -127,7 +137,8 @@ const PrimaryNavBar = () => {
                                     fontSize: "1.2rem",
                                 }}
                                 endIcon={
-                                    <Badge badgeContent={4} color="error">
+                                    //
+                                    <Badge badgeContent={cartTotalQuantity} color="error">
                                         <ShoppingCartIcon fontSize="medium" />
                                     </Badge>
                                 }

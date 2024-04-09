@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, decreaseAmountInCart, deleteFromCart } from "./cartSlice";
+import { addToCart, changeItemAmount, decreaseAmountInCart, deleteFromCart } from "./cartSlice";
 import {
     Box,
     Button,
@@ -93,6 +93,11 @@ const CartItem = ({ cartItem }) => {
         dispatch(deleteFromCart(cartItem));
     };
 
+    const onChangeItemAmount = (e) => {
+        const inputValue = e.target.value;
+        dispatch(changeItemAmount({ cartItem, inputValue }));
+    };
+
     return (
         <CardAdaptive>
             {/*  */}
@@ -114,6 +119,7 @@ const CartItem = ({ cartItem }) => {
                     sx={{ textTransform: "none", paddingLeft: 0 }}
                     size={isMobileBreakpoint ? "small" : "large"}
                     startIcon={<DeleteIcon />}
+                    onClick={onDeleteItemClick}
                 >
                     Delete item
                 </Button>
@@ -124,18 +130,20 @@ const CartItem = ({ cartItem }) => {
                     {price} $
                 </Typography>
                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
-                    <Button>-</Button>
+                    <Button onClick={onDecreaseAmountClick}>-</Button>
                     <Button disableRipple sx={{ p: "1px", "&:hover": { backgroundColor: "transparent" }, width: "40px" }}>
                         <input
                             style={{ width: "100%", height: "100%", textAlign: "center" }}
                             className="my-input-number"
                             type="number"
-                            defaultValue={quantity}
+                            // defaultValue={quantity}
                             min="1"
                             max="99"
+                            value={quantity}
+                            onChange={onChangeItemAmount}
                         />
                     </Button>
-                    <Button>+</Button>
+                    <Button onClick={onIncreaseAmountClick}>+</Button>
                 </ButtonGroup>
             </CardContentPriceAndCounter>
         </CardAdaptive>
