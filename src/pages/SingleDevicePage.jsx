@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import ImageGallery from "react-image-gallery";
 import {
     Breadcrumbs,
@@ -22,6 +23,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "react-image-gallery/styles/css/image-gallery.css";
+import { addToCart } from "../features/cart/cartSlice";
 
 const RoundButton = styled(Button)(({ back }) => ({
     borderRadius: "50%",
@@ -57,6 +59,7 @@ const CardContentCustomized = styled(CardContent)(({ theme, needmobilechange = "
 
 const SingleDevicePage = () => {
     const theme = useTheme();
+    const dispatch = useDispatch();
     const { id } = useParams();
 
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
@@ -68,6 +71,10 @@ const SingleDevicePage = () => {
     const images = imgURLs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
 
     console.log("SingleDevicePage", data);
+
+    const onBuyClick = () => {
+        dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
+    };
 
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
@@ -174,7 +181,7 @@ const SingleDevicePage = () => {
                         </CardActions> */}
                     </Card>
                     <Card elevation={0}>
-                        <Button variant="contained" size="large" sx={{ width: "100%" }}>
+                        <Button variant="contained" size="large" sx={{ width: "100%" }} onClick={onBuyClick}>
                             Add to Cart
                         </Button>
                     </Card>

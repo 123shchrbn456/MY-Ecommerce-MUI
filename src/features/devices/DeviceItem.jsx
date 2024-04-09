@@ -39,9 +39,7 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
     const { id, brand, model, color, imgURLs, price, storage } = deviceData;
 
     const onBuyClick = () => {
-        const name = model;
-        // send to the cart
-        dispatch(addToCart({ name, id, storage, img: imgURLs[0], color, price }));
+        dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
     };
 
     return (
