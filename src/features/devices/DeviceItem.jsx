@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import {
     Box,
     Button,
@@ -13,11 +14,11 @@ import {
     Typography,
     styled,
 } from "@mui/material";
+
+import { addToCart } from "../cart/cartSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import BalanceIcon from "@mui/icons-material/Balance";
-
-import iphone15Img from "../../images/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
 
 const CardCustomized = styled(Card)({
     "&:hover": {
@@ -33,8 +34,16 @@ const LinkCustomized = styled(Link)({
 });
 
 const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }) => {
+    const dispatch = useDispatch();
     const { xs, sm, md, lg, xl } = grid;
     const { id, brand, model, color, imgURLs, price, storage } = deviceData;
+
+    const onBuyClick = () => {
+        const name = model;
+        // send to the cart
+        dispatch(addToCart({ name, id, storage, img: imgURLs[0], color, price }));
+    };
+
     return (
         <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
             <CardCustomized elevation={2} sx={{ p: 2 }}>
@@ -62,7 +71,9 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
                     </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 1, justifyContent: { xs: "center", sm: "space-between" }, flexWrap: { xs: "wrap", sm: "no-wrap" } }}>
-                    <Button variant="contained">Buy</Button>
+                    <Button variant="contained" onClick={onBuyClick}>
+                        Buy
+                    </Button>
                     <Box mt={1} mb={1} ml={0}>
                         <IconButton aria-label="add to favorites" size="small">
                             <FavoriteIcon />
