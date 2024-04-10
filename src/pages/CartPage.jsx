@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, Card, Divider, Grid, IconButton, Typography, Stack, styled, useMediaQuery, useTheme } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -16,6 +17,7 @@ const BoxOrderSummary = styled(Box)({
 const CartPage = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isMobileBreakpoint = useMediaQuery(theme.breakpoints.down("sm"));
 
     const cartItems = useSelector(selectAllCartItems);
@@ -29,11 +31,14 @@ const CartPage = () => {
     useEffect(() => {
         dispatch(getTotalPriceAndQuantity());
     }, [cartItems]);
+
+    const backButtonClickHandler = () => navigate(-1);
+
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
             <Grid item xs={12}>
                 <Stack direction="row" alignItems="center" spacing={2}>
-                    <IconButton>
+                    <IconButton onClick={backButtonClickHandler}>
                         <ArrowBackIcon fontSize="large" />
                     </IconButton>
                     <Typography variant="h4">Cart</Typography>

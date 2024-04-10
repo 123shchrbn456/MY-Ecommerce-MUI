@@ -1,17 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
     Accordion,
     AccordionSummary,
     AccordionDetails,
-    Box,
-    Button,
-    ButtonGroup,
     Card,
     CardActionArea,
-    CardActions,
     CardContent,
     CardMedia,
-    Divider,
     Grid,
     IconButton,
     Link,
@@ -21,24 +17,13 @@ import {
     useMediaQuery,
     useTheme,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import iphone15Img from "../images/iphone_15/iphone_15_pro_max_natural_titanium_pdp_image_position-1__ww-en_1.jpeg";
 
-const BoxOrderSummary = styled(Box)({
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: "8px 0px",
-});
-
 const CardAdaptive = styled(Card)(({ theme }) => ({
-    // padding: "16px",
     padding: "8px",
     marginBottom: "8px",
     display: "flex",
@@ -48,29 +33,19 @@ const CardAdaptive = styled(Card)(({ theme }) => ({
     },
 }));
 
-const CardContentImage = styled(CardContent)(({ theme }) => ({
+const CardContentImage = styled(CardContent)({
     padding: 0,
     flexGrow: 1,
     display: "flex",
     alignItems: "center",
-    // flexBasis: "100%",
-    [theme.breakpoints.up("sm")]: {
-        // flexBasis: "auto",
-    },
-}));
+});
 
-const CardContentInfo = styled(CardContent)(({ theme }) => ({
+const CardContentInfo = styled(CardContent)({
     padding: 0,
     flexGrow: 4,
     display: "flex",
-    // flexDirection: "row",
     alignItems: "center",
-    // flexBasis: "100%",
-    [theme.breakpoints.up("sm")]: {
-        // flexBasis: "auto",
-        // alignItems: "center",
-    },
-}));
+});
 
 const LinkTitle = styled(Link)(({ theme }) => ({
     fontWeight: 600,
@@ -81,7 +56,7 @@ const LinkTitle = styled(Link)(({ theme }) => ({
     },
 }));
 
-const CardContentPriceAndCounter = styled(CardContent)(({ theme }) => ({
+const CardContentPriceAndCounter = styled(CardContent)({
     padding: 0,
     flexGrow: 1,
     display: "flex",
@@ -90,16 +65,20 @@ const CardContentPriceAndCounter = styled(CardContent)(({ theme }) => ({
     "&:last-child": {
         paddingBottom: 0,
     },
-}));
+});
 
 const MyOrdersPage = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
     const isMobileBreakpoint = useMediaQuery(theme.breakpoints.down("sm"));
+
+    const backButtonClickHandler = () => navigate(-1);
+
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
             <Grid item xs={12}>
                 <Stack direction="row" alignItems="center" spacing={2}>
-                    <IconButton>
+                    <IconButton onClick={backButtonClickHandler}>
                         <ArrowBackIcon fontSize="large" />
                     </IconButton>
                     <Typography variant="h4">My Orders</Typography>
