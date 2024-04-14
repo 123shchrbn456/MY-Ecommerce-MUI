@@ -1,7 +1,7 @@
 import { generateFilteringData } from "../../utils/helpers";
 import { apiSlice } from "../api/apiSlice";
 import { db } from "../../firebase";
-import { and, collection, endAt, getDocs, limit, or, query, startAt, where } from "firebase/firestore";
+import { and, collection, getCountFromServer, getDocs, limit, or, orderBy, query, where } from "firebase/firestore";
 
 export const devicesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -16,7 +16,9 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
             ],
         }),
         getDevicesFromFirebase: builder.query({
-            async queryFn(uniqueSearchParamsObj) {
+            async queryFn({ uniqueSearchParamsObj, pageNum, pageSize }) {
+                const limitPerPage = pageNum * pageSize;
+
                 try {
                     const devicesRef = collection(db, "devices");
 
@@ -30,22 +32,37 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                         filterDevicesQuery.push(searchKeyQuery);
                     });
 
-                    // const q = query(devicesRef, and(...filterDevicesQuery), limit(9));
-                    // https://firebase.google.com/docs/firestore/query-data/query-cursors
-                    const q = query(devicesRef, and(...filterDevicesQuery));
+                    const qWithoutLimit = query(devicesRef, and(...filterDevicesQuery), orderBy("model"));
+                    const q = query(devicesRef, and(...filterDevicesQuery), limit(limitPerPage), orderBy("model"));
+
+                    const devicesTotalNumberSnapshot = await getCountFromServer(qWithoutLimit);
+                    const devicesTotalNumber = devicesTotalNumberSnapshot.data().count;
+                    const totalPagesNumber = Math.ceil(devicesTotalNumber / pageSize);
 
                     const querySnap = await getDocs(q);
                     let devicesList = [];
-
                     querySnap.forEach((doc) => {
                         devicesList.push({ id: doc.id, ...doc.data(), timeStamp: doc.data().timeStamp?.seconds });
                     });
-                    return { data: devicesList };
+
+                    let amountOfReturningDevices = pageSize;
+                    const isLastPage = Number(pageNum) === Number(totalPagesNumber);
+
+                    if (isLastPage) {
+                        const amountOfPreviousPages = pageNum - 1;
+                        const amountOfPreviousPagesDevices = pageSize * amountOfPreviousPages;
+                        const remainedAmountOfDevices = devicesTotalNumber - amountOfPreviousPagesDevices;
+                        amountOfReturningDevices = remainedAmountOfDevices;
+                    }
+                    const devicesListLastPart = devicesList.splice(-amountOfReturningDevices);
+
+                    return { data: { devices: devicesListLastPart, totalPagesNumber } };
                 } catch (error) {
                     console.log(error);
                 }
             },
             providesTags: [{ type: "Devices" }],
+            keepUnusedDataFor: 3600,
         }),
         getFilteringData: builder.query({
             async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
@@ -65,7 +82,6 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
         }),
         getFilteringDataFromFirebase: builder.query({
             async queryFn({ urlCategoryValue, urlBrandValues = [] }) {
-                console.log("!!!!!!", urlCategoryValue, urlBrandValues);
                 try {
                     const devicesRef = collection(db, "devices");
 
@@ -95,6 +111,7 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                 }
             },
             providesTags: [{ type: "FilteringValues" }],
+            keepUnusedDataFor: 3600,
         }),
         getSingleDevice: builder.query({
             query: (singleGoodsId) => `/merchandise-improved?id=${singleGoodsId}`,

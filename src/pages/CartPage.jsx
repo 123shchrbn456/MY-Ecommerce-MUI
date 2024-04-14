@@ -24,10 +24,6 @@ const CartPage = () => {
     const cartTotalQuantity = useSelector(selectCartTotalQuantity);
     const cartTotalAmount = useSelector(selectCartTotalAmount);
 
-    console.log("cartItems---", cartItems);
-    console.log("cartTotalQuantity---", cartTotalQuantity);
-    console.log("cartTotalAmount---", cartTotalAmount);
-
     useEffect(() => {
         dispatch(getTotalPriceAndQuantity());
     }, [cartItems]);

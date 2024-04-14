@@ -124,7 +124,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState)}
                 {...bindFocus(popupState)}
-                to="/devices?category=smartphones"
+                to="/devices?category=smartphones&_page=1"
                 onClick={(e) => {
                     popupState.close(e);
                 }}
@@ -140,15 +140,15 @@ const CascadingHoverMenus = () => {
                 {/* Submenus */}
                 <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Apple">
                     <CascadingMenuItem>
-                        <SeriesButton to="/smartphones?series=15pro">15 Pro Series</SeriesButton>
+                        <SeriesButton to="/smartphones?series=15pro&_page=1">15 Pro Series</SeriesButton>
                     </CascadingMenuItem>
 
                     <CascadingMenuItem>
-                        <SeriesButton to="/smartphones?series=15">15 Series</SeriesButton>
+                        <SeriesButton to="/smartphones?series=15&_page=1">15 Series</SeriesButton>
                     </CascadingMenuItem>
 
                     <CascadingMenuItem>
-                        <SeriesButton to="/smartphones?series=14pro">14 Pro Series</SeriesButton>
+                        <SeriesButton to="/smartphones?series=14pro&_page=1">14 Pro Series</SeriesButton>
                     </CascadingMenuItem>
                 </CascadingSubmenu>
                 <CascadingSubmenu popupId="moreChoicesCascadingMenu2" title="Samsung">
@@ -187,7 +187,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState2)}
                 {...bindFocus(popupState2)}
-                to="/devices?category=tablets"
+                to="/devices?category=tablets&_page=1"
                 onClick={(e) => {
                     popupState2.close(e);
                 }}
@@ -231,7 +231,7 @@ const CascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState3)}
                 {...bindFocus(popupState3)}
-                to="/devices?category=laptops"
+                to="/devices?category=laptops&_page=1"
                 onClick={(e) => {
                     popupState3.close(e);
                 }}

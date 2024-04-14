@@ -1,7 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-
-import { Accordion, Box, AccordionSummary, AccordionDetails, Typography, Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-
+import { Grid } from "@mui/material";
 import { useGetFilteringDataFromFirebaseQuery } from "../features/devices/devicesSlice";
 import SingleFilterAccordion from "../features/filter/SingleFilterAccordion";
 
@@ -14,8 +12,6 @@ const FilterAccordions = () => {
         urlCategoryValue,
         urlBrandValues,
     });
-
-    console.log(generatedFilteringDataFromFirebase);
 
     return (
         <Grid item xs={12} lg={2}>

@@ -5,6 +5,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FilterOptionContainer from "./FilterOptionContainer";
 
 const SingleFilterAccordion = ({ filterCategoryName, filterCategoryValues }) => {
+    // console.log("filterCategoryName:::", filterCategoryName);
     return (
         <Accordion className="my-filter-accordion" elevation={3}>
             <AccordionSummary
@@ -37,4 +38,5 @@ const SingleFilterAccordion = ({ filterCategoryName, filterCategoryValues }) => 
     );
 };
 
-export default SingleFilterAccordion;
+export default React.memo(SingleFilterAccordion);
+// export default SingleFilterAccordion;

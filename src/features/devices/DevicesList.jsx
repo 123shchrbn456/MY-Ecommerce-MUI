@@ -7,24 +7,33 @@ import { PAGE_SIZE } from "../../utils/constants";
 import DevicesOperations from "./DevicesOperations";
 import DeviceItem from "./DeviceItem";
 import { useGetDevicesFromFirebaseQuery } from "./devicesSlice";
+import DevicesPagination from "./DevicesPagination";
 
 const DevicesList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [grid, setGrid] = useState({ xs: 6, sm: 6, md: 4, lg: 4, xl: 3 });
 
-    const { xs, sm, md, lg, xl } = grid;
-    const isPaginationActive = searchParams.get("_page");
+    const currentPageNumber = searchParams.get("_page");
 
-    const { data: devices, isLoading, isSuccess } = useGetDevicesFromFirebaseQuery(createUniqueSearchParamsObj());
-
-    console.log("Devices:", devices);
     useEffect(() => {
-        if (!isPaginationActive) {
+        if (!currentPageNumber) {
             searchParams.set("_page", 1);
-            searchParams.set("_limit", PAGE_SIZE);
             setSearchParams(searchParams);
         }
     }, []);
+
+    const { data, isLoading, isSuccess } = useGetDevicesFromFirebaseQuery({
+        uniqueSearchParamsObj: createUniqueSearchParamsObj(),
+        pageNum: currentPageNumber,
+        pageSize: PAGE_SIZE,
+    });
+
+    if (isLoading) return <div>Loading....</div>;
+
+    const { devices = null, totalPagesNumber = null } = data;
+
+    // console.log("Devices:", devices);
+    // if (!isLoading) setLast(devices[devices.length - 1]);
 
     const changeGridHandler = (gridNum) => {
         setGrid(gridNum);
@@ -74,6 +83,7 @@ const DevicesList = () => {
             if (key !== "_page" && key !== "_limit") searchKeys.push(key);
         }
         const uniqueSearchKeys = [...new Set(searchKeys)];
+
         return uniqueSearchKeys;
     }
 
@@ -83,15 +93,26 @@ const DevicesList = () => {
         uniqueSearchKeys.forEach((searchKey) => {
             searchObj[searchKey] = searchParams.getAll(searchKey);
         });
+        // console.log("searchObj", searchObj);
         // console.log(searchObj);
         return searchObj;
     }
+
+    const pageChangeHandler = (e, value) => {
+        searchParams.set("_page", value);
+        setSearchParams(searchParams);
+    };
 
     return (
         <Grid className="devices-list" item xs={12} lg={10} pb={3}>
             <DevicesOperations changeGridHandler={changeGridHandler} />
             <Grid container spacing={1}>
                 {!isLoading && devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
+                <DevicesPagination
+                    totalPagesNumber={totalPagesNumber}
+                    currentPageNumber={Number(currentPageNumber)}
+                    pageChangeHandler={pageChangeHandler}
+                />
             </Grid>
         </Grid>
     );

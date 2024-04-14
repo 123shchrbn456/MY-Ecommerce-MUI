@@ -35,15 +35,15 @@ const MobileCategoriesList = () => {
     return (
         // <List>
         <Box>
-            <CustomizedLink to="/smartphones">
+            <CustomizedLink to="/devices?category=smartphones&_page=1">
                 <SmartphoneIcon fontSize="large" />
                 <Typography variant="subtitle1">Smartphones</Typography>
             </CustomizedLink>
-            <CustomizedLink to="/tablets">
+            <CustomizedLink to="/devices?category=tablets&_page=1">
                 <TabletMacIcon fontSize="large" />
                 <Typography variant="subtitle1">Tablets</Typography>
             </CustomizedLink>
-            <CustomizedLink to="/laptops">
+            <CustomizedLink to="/devices?category=laptops&_page=1">
                 <LaptopIcon fontSize="large" />
                 <Typography variant="subtitle1">Laptops</Typography>
             </CustomizedLink>
