@@ -2,9 +2,7 @@ import * as React from "react";
 import { List, ListItemButton, ListItemText, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 
-const options = ["Default", "Price: Low to High", "Price: High to Low", "Title: A - Z", "Title: Z - A"];
-
-export default function SimpleListMenu() {
+export default function SortBy({ sortOptions, sortItemClickHandler }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const open = Boolean(anchorEl);
@@ -12,7 +10,8 @@ export default function SimpleListMenu() {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleMenuItemClick = (event, index) => {
+    const handleSortItemClick = (index, sortValue) => {
+        sortItemClickHandler(sortValue);
         setSelectedIndex(index);
         setAnchorEl(null);
     };
@@ -35,7 +34,7 @@ export default function SimpleListMenu() {
                     <ListItemIcon sx={{ minWidth: 36 }}>
                         <SortIcon />
                     </ListItemIcon>
-                    <ListItemText primary={selectedIndex === 0 ? "Sort By:" : options[selectedIndex]} />
+                    <ListItemText primary={selectedIndex === 0 ? "Sort By:" : sortOptions[selectedIndex]["name"]} />
                 </ListItemButton>
             </List>
             <Menu
@@ -48,9 +47,13 @@ export default function SimpleListMenu() {
                     role: "listbox",
                 }}
             >
-                {options.map((option, index) => (
-                    <MenuItem key={option} selected={index === selectedIndex} onClick={(event) => handleMenuItemClick(event, index)}>
-                        {option}
+                {sortOptions.map((option, index) => (
+                    <MenuItem
+                        key={option.name}
+                        selected={index === selectedIndex}
+                        onClick={() => handleSortItemClick(index, option.URLsortValue)}
+                    >
+                        {option.name}
                     </MenuItem>
                 ))}
             </Menu>

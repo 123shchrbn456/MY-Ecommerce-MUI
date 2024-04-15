@@ -26,6 +26,7 @@ const DevicesList = () => {
         uniqueSearchParamsObj: createUniqueSearchParamsObj(),
         pageNum: currentPageNumber,
         pageSize: PAGE_SIZE,
+        sortParam: searchParams.get("sort"),
     });
 
     if (isLoading) return <div>Loading....</div>;
@@ -80,7 +81,7 @@ const DevicesList = () => {
     function getUniqueURLSearchKeys() {
         let searchKeys = [];
         for (const key of searchParams.keys()) {
-            if (key !== "_page" && key !== "_limit") searchKeys.push(key);
+            if (key !== "_page" && key !== "sort") searchKeys.push(key);
         }
         const uniqueSearchKeys = [...new Set(searchKeys)];
 

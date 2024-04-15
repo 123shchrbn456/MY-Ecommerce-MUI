@@ -16,7 +16,10 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
             ],
         }),
         getDevicesFromFirebase: builder.query({
-            async queryFn({ uniqueSearchParamsObj, pageNum, pageSize }) {
+            async queryFn({ uniqueSearchParamsObj, pageNum, pageSize, sortParam }) {
+                const sort = sortParam === null ? "model_desc" : sortParam;
+                const [sortValue, sortDirection] = sort.split("_");
+
                 const limitPerPage = pageNum * pageSize;
 
                 try {
@@ -32,8 +35,8 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                         filterDevicesQuery.push(searchKeyQuery);
                     });
 
-                    const qWithoutLimit = query(devicesRef, and(...filterDevicesQuery), orderBy("model"));
-                    const q = query(devicesRef, and(...filterDevicesQuery), limit(limitPerPage), orderBy("model"));
+                    const qWithoutLimit = query(devicesRef, and(...filterDevicesQuery), orderBy(sortValue, sortDirection));
+                    const q = query(devicesRef, and(...filterDevicesQuery), limit(limitPerPage), orderBy(sortValue, sortDirection));
 
                     const devicesTotalNumberSnapshot = await getCountFromServer(qWithoutLimit);
                     const devicesTotalNumber = devicesTotalNumberSnapshot.data().count;
