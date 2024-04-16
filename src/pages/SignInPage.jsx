@@ -1,15 +1,23 @@
 import * as React from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useSignInMutation } from "../features/authentication/authenticationSlice";
 import { Button, Divider, TextField, FormControlLabel, Checkbox, Grid, Box, Typography, Container, Stack } from "@mui/material";
 
-export default function SignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
+export default function SignInPage() {
+    const navigate = useNavigate();
+
+    const [signIn, { isLoading, isError }] = useSignInMutation();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData(e.currentTarget);
+        const formData = { email: data.get("email"), password: data.get("password") };
+        const { email, password } = formData;
+        const { data: user } = await signIn({ email, password });
+        if (user) {
+            console.log("You are logged in");
+            navigate("/devices?category=smartphones&_page=1");
+        }
     };
 
     return (
@@ -26,7 +34,7 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
@@ -47,7 +55,7 @@ export default function SignIn() {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <Button type="submit" to="#" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>
+                        <Button type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>
                             Sign In
                         </Button>
                         <Divider />
@@ -63,29 +71,6 @@ export default function SignIn() {
                                 Recover Password
                             </Button>
                         </Stack>
-                        {/* <Grid container>
-                            <Grid item xs={6}>
-                                <Typography to="#" variant="subtitle1">
-                                    Need an account?
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Button to="/sign-up" variant="contained">
-                                    Sign Up
-                                </Button>
-                            </Grid>
-
-                            <Grid item xs={6}>
-                                <Typography to="#" variant="subtitle1">
-                                    Forgot password?
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Button to="/sign-up" variant="contained">
-                                    Recover Password
-                                </Button>
-                            </Grid>
-                        </Grid> */}
                     </Box>
                 </Box>
             </Container>

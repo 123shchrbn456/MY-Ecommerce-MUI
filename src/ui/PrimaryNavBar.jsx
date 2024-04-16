@@ -1,20 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    AppBar,
-    Box,
-    Button,
-    Toolbar,
-    IconButton,
-    Typography,
-    InputBase,
-    Badge,
-    Menu,
-    MenuItem,
-    Container,
-    Link,
-    Avatar,
-} from "@mui/material";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AppBar, Box, Button, Toolbar, IconButton, InputBase, Badge, Menu, MenuItem, Container, Link, Avatar } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -59,10 +46,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const PrimaryNavBar = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const auth = getAuth();
     const dispatch = useDispatch();
 
-    const isAuthenticated = true;
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        });
+    }, [auth]);
+
     const isMenuOpen = Boolean(anchorEl);
 
     const cartItems = useSelector(selectAllCartItems);
@@ -78,6 +76,13 @@ const PrimaryNavBar = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleSignOut = (e) => {
+        e.preventDefault();
+        console.log("Sign out is successful");
+        auth.signOut();
+        // navigate("/devices?category=smartphones&_page=1");
     };
 
     const menuId = "primary-search-account-menu";
@@ -102,6 +107,11 @@ const PrimaryNavBar = () => {
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
                 <Link to="/my-orders">My Orders</Link>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link to="" onClick={handleSignOut}>
+                    Sign out
+                </Link>
             </MenuItem>
         </Menu>
     );

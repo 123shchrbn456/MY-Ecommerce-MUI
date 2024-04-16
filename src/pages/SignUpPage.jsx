@@ -1,14 +1,28 @@
-import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSignUpMutation } from "../features/authentication/authenticationSlice";
 import { Button, TextField, Grid, Box, Typography, Container, Divider, Stack } from "@mui/material";
 
-export default function SignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
+export default function SignUpPage() {
+    const navigate = useNavigate();
+    const [signUp, { isLoading, isError }] = useSignUpMutation();
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        const data = new FormData(e.currentTarget);
+        const formData = {
+            name: data.get("name"),
             email: data.get("email"),
             password: data.get("password"),
-        });
+        };
+
+        try {
+            await signUp({ formData });
+            console.log("You are signed up");
+            navigate("/devices?category=smartphones&_page=1");
+        } catch (error) {
+            console.error(error.message);
+            console.log("Something went wrong with registration");
+        }
     };
 
     return (
@@ -25,21 +39,10 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={submitHandler} noValidate sx={{ mt: 1 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField required fullWidth id="lastName" label="Last Name" name="lastName" autoComplete="family-name" />
+                            <Grid item xs={12}>
+                                <TextField required fullWidth id="name" label="Name" name="name" autoComplete="name" />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
@@ -56,7 +59,7 @@ export default function SignIn() {
                                 />
                             </Grid>
                         </Grid>
-                        <Button to="#" type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>
+                        <Button type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>
                             Sign Up
                         </Button>
                         <Divider />

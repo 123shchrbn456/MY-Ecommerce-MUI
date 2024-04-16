@@ -7,6 +7,6 @@ export const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         cart: cartReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware),
     devTools: true,
 });
