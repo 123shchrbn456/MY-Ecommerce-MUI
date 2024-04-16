@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CartItem from "../features/cart/CartItem";
+import {
+    clearCartItems,
+    getTotalPriceAndQuantity,
+    selectAllCartItems,
+    selectCartTotalAmount,
+    selectCartTotalQuantity,
+    useAddNewOrderToFirebaseMutation,
+} from "../features/cart/cartSlice";
+
 import { Box, Button, Card, Divider, Grid, IconButton, Typography, Stack, styled, useMediaQuery, useTheme } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
-import { getTotalPriceAndQuantity, selectAllCartItems, selectCartTotalAmount, selectCartTotalQuantity } from "../features/cart/cartSlice";
-import CartItem from "../features/cart/CartItem";
 
 const BoxOrderSummary = styled(Box)({
     display: "flex",
@@ -24,11 +31,24 @@ const CartPage = () => {
     const cartTotalQuantity = useSelector(selectCartTotalQuantity);
     const cartTotalAmount = useSelector(selectCartTotalAmount);
 
+    const [addNewOrder, { isLoading, isError }] = useAddNewOrderToFirebaseMutation();
+
     useEffect(() => {
         dispatch(getTotalPriceAndQuantity());
     }, [cartItems]);
 
     const backButtonClickHandler = () => navigate(-1);
+
+    const submitCartHandler = async () => {
+        const orderData = {
+            cartItems,
+            cartTotalQuantity,
+            cartTotalAmount,
+        };
+        await addNewOrder(orderData);
+        dispatch(clearCartItems());
+        console.log(isError);
+    };
 
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
@@ -80,7 +100,7 @@ const CartPage = () => {
                             {cartTotalAmount} $
                         </Typography>
                     </BoxOrderSummary>
-                    <Button variant="contained" fullWidth>
+                    <Button variant="contained" fullWidth onClick={submitCartHandler}>
                         Checkout
                     </Button>
                 </Card>

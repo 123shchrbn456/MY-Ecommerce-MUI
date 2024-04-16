@@ -2,13 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 import { addDoc, collection, getDocs, orderBy, query, serverTimestamp, where } from "firebase/firestore";
 import { db } from "../../firebase";
+import { getAuth } from "firebase/auth";
 
 export const cartApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         addNewOrderToFirebase: builder.mutation({
             async queryFn(order) {
+                const auth = await getAuth();
                 try {
-                    const newOrder = { ...order, timestamp: serverTimestamp() };
+                    const newOrder = { ...order, timestamp: serverTimestamp(), userRef: auth.currentUser.uid };
                     const docRef = await addDoc(collection(db, "orders"), newOrder);
                     // toast.success("Order is created");
                     return { data: docRef.id };
@@ -19,16 +21,19 @@ export const cartApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: [{ type: "PersonalOrders" }],
         }),
         getUserOrders: builder.query({
-            async queryFn(userId) {
+            async queryFn() {
                 try {
+                    const auth = await getAuth();
                     const ordersRef = collection(db, "orders");
                     // const q = query(ordersRef, where("userRef", "==", auth.currentUser.uid), orderBy("timestamp", "desc"));
-                    const q = query(ordersRef, where("userRef", "==", userId), orderBy("timestamp", "asc"));
+                    const q = query(ordersRef, where("userRef", "==", auth.currentUser.uid), orderBy("timestamp", "asc"));
                     const querySnap = await getDocs(q);
                     let orders = [];
                     querySnap.forEach((doc) => {
                         orders.push({ id: doc.id, ...doc.data(), timestamp: doc.data().timestamp?.seconds });
                     });
+
+                    console.log(orders);
                     return { data: orders };
                 } catch (err) {
                     throw new Error(err);
