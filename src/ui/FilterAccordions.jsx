@@ -12,6 +12,7 @@ const FilterAccordions = () => {
         urlCategoryValue,
         urlBrandValues,
     });
+    // console.log("generatedFilteringDataFromFirebase", generatedFilteringDataFromFirebase);
 
     return (
         <Grid item xs={12} lg={2}>

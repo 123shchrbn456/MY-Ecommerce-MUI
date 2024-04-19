@@ -33,7 +33,10 @@ const DevicesList = () => {
 
     const { devices = null, totalPagesNumber = null } = data;
 
+    console.log("devices", devices);
+
     // console.log("Devices:", devices);
+
     // if (!isLoading) setLast(devices[devices.length - 1]);
 
     const changeGridHandler = (gridNum) => {
@@ -109,11 +112,11 @@ const DevicesList = () => {
             <DevicesOperations changeGridHandler={changeGridHandler} />
             <Grid container spacing={1}>
                 {!isLoading && devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
-                <DevicesPagination
+                {/* <DevicesPagination
                     totalPagesNumber={totalPagesNumber}
                     currentPageNumber={Number(currentPageNumber)}
                     pageChangeHandler={pageChangeHandler}
-                />
+                /> */}
             </Grid>
         </Grid>
     );

@@ -103,9 +103,6 @@ const PrimaryNavBar = () => {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>
-                <Link to="/profile">Profile</Link>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
                 <Link to="/my-orders">My Orders</Link>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>

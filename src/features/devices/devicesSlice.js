@@ -17,7 +17,7 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
         }),
         getDevicesFromFirebase: builder.query({
             async queryFn({ uniqueSearchParamsObj, pageNum, pageSize, sortParam }) {
-                const sort = sortParam === null ? "model_desc" : sortParam;
+                const sort = sortParam === null ? "id_asc" : sortParam;
                 const [sortValue, sortDirection] = sort.split("_");
 
                 const limitPerPage = pageNum * pageSize;
@@ -34,7 +34,7 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                         const searchKeyQuery = or(...searchValues.map((searchValue) => where(searchKey, "==", searchValue)));
                         filterDevicesQuery.push(searchKeyQuery);
                     });
-
+                    console.log("filterDevicesQuery:", filterDevicesQuery);
                     const qWithoutLimit = query(devicesRef, and(...filterDevicesQuery), orderBy(sortValue, sortDirection));
                     const q = query(devicesRef, and(...filterDevicesQuery), limit(limitPerPage), orderBy(sortValue, sortDirection));
 
@@ -48,6 +48,8 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                         devicesList.push({ id: doc.id, ...doc.data(), timeStamp: doc.data().timeStamp?.seconds });
                     });
 
+                    console.log("devicesList", devicesList);
+
                     let amountOfReturningDevices = pageSize;
                     const isLastPage = Number(pageNum) === Number(totalPagesNumber);
 
@@ -59,6 +61,7 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
                     }
                     const devicesListLastPart = devicesList.splice(-amountOfReturningDevices);
 
+                    console.log(devicesListLastPart);
                     return { data: { devices: devicesListLastPart, totalPagesNumber } };
                 } catch (error) {
                     console.log(error);

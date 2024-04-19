@@ -36,10 +36,12 @@ const LinkCustomized = styled(Link)({
 const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }) => {
     const dispatch = useDispatch();
     const { xs, sm, md, lg, xl } = grid;
-    const { id, brand, model, color, imgURLs, price, storage } = deviceData;
+    // const { id, brand, model, color, imgURLs, price, storage } = deviceData;
+    const { id, avatar_img, brand, device_name, memory, price, title_color } = deviceData;
 
     const onBuyClick = () => {
-        dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
+        // dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
+        dispatch(addToCart({ name: device_name, id, storage: memory, img: avatar_img, color: title_color, price }));
     };
 
     return (
@@ -48,25 +50,38 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
                 <CardActionArea className="my-card-action-area" to={`/devices/${id}`}>
                     <CardMedia
                         sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain", transition: "transform .3s" }}
-                        image={imgURLs[0]}
+                        image={avatar_img}
                         title="avatar"
                         component="img"
                     />
                 </CardActionArea>
                 <CardContent sx={{ p: 1, pb: 0 }}>
-                    <LinkCustomized to="/devices/123">
-                        <Typography component="h6" variant="subtitle1" noWrap={true} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-                            {brand} {model} {color} {storage}
+                    <LinkCustomized to={`/devices/${id}`}>
+                        <Typography component="h6" variant="subtitle1" noWrap={true} sx={{ textAlign: "center" }}>
+                            {brand} {device_name} {title_color} {memory}
+                        </Typography>
+                        <Typography component="h6" variant="subtitle1" noWrap={true} sx={{ textAlign: "center" }}>
+                            ({title_color})
                         </Typography>
                     </LinkCustomized>
 
-                    <Typography
-                        component="h5"
-                        variant="h5"
-                        sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" }, textAlign: { xs: "center", sm: "left" } }}
-                    >
-                        {price} $
-                    </Typography>
+                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography
+                            component="h5"
+                            variant="h6"
+                            color="#999"
+                            sx={{ fontSize: { xs: "1.2rem", sm: "1.3rem" }, textAlign: "left", textDecorationLine: "line-through" }}
+                        >
+                            1200 $
+                        </Typography>
+                        <Typography
+                            component="h5"
+                            variant="h6"
+                            sx={{ fontSize: { xs: "1.2rem", sm: "1.3rem" }, textAlign: { xs: "center", sm: "right" } }}
+                        >
+                            {price}
+                        </Typography>
+                    </Box>
                 </CardContent>
                 <CardActions sx={{ p: 1, justifyContent: { xs: "center", sm: "space-between" }, flexWrap: { xs: "wrap", sm: "no-wrap" } }}>
                     <Button variant="contained" onClick={onBuyClick}>
