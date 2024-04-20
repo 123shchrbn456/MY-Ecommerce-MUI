@@ -33,7 +33,7 @@ const DevicesList = () => {
 
     const { devices = null, totalPagesNumber = null } = data;
 
-    console.log("devices", devices);
+    // console.log("devices", devices);
 
     // console.log("Devices:", devices);
 

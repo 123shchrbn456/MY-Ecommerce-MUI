@@ -10,7 +10,7 @@ const DevicesPage = () => {
 
     return (
         <Grid container spacing={2}>
-            {/* {!isThinnerThanLarge && <FilterAccordions />} */}
+            {!isThinnerThanLarge && <FilterAccordions />}
             {/* --- Devices List --- */}
             <Devices />
         </Grid>

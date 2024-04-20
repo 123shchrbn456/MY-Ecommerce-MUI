@@ -58,7 +58,7 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
                 <CardContent sx={{ p: 1, pb: 0 }}>
                     <LinkCustomized to={`/devices/${id}`}>
                         <Typography component="h6" variant="subtitle1" noWrap={true} sx={{ textAlign: "center" }}>
-                            {brand} {device_name} {title_color} {memory}
+                            {brand} {device_name} {memory}
                         </Typography>
                         <Typography component="h6" variant="subtitle1" noWrap={true} sx={{ textAlign: "center" }}>
                             ({title_color})
@@ -72,14 +72,14 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
                             color="#999"
                             sx={{ fontSize: { xs: "1.2rem", sm: "1.3rem" }, textAlign: "left", textDecorationLine: "line-through" }}
                         >
-                            1200 $
+                            {price + 150} $
                         </Typography>
                         <Typography
                             component="h5"
                             variant="h6"
                             sx={{ fontSize: { xs: "1.2rem", sm: "1.3rem" }, textAlign: { xs: "center", sm: "right" } }}
                         >
-                            {price}
+                            {price} $
                         </Typography>
                     </Box>
                 </CardContent>

@@ -32,7 +32,30 @@ export const extractUniqueValuesFromArray = (data, filteringParam) => {
 };
 
 export const generateFilteringData = (categoriesData, categoryAndBrandsResult, urlBrandValues) => {
-    const exceptionsFilterCategories = ["id", "model", "category", "brand", "series", "price", "timeStamp", "imgURLs"];
+    const exceptionsFilterCategories = [
+        "id",
+        "model",
+        "category",
+        "brand",
+        "series",
+        "price",
+        "avatar_img",
+        "battery_size",
+        "battery_type",
+        "body",
+        "chipset",
+        "device_imgs",
+        "device_name",
+        "display_resolution",
+        "os",
+        "popularity",
+        "release_date",
+        "specifications",
+        "storage",
+        "timeStamp",
+        "title_color",
+        "video_pixels",
+    ];
     let tempObj = {};
 
     const brandsFilteringValues = extractUniqueValuesFromArray(categoriesData, "brand");
