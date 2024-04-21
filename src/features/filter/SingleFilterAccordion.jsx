@@ -3,6 +3,9 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography, FormGroup } 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import FilterOptionContainer from "./FilterOptionContainer";
+import { FILTER_ACCORDION_TITLES } from "../../utils/constants";
+
+FILTER_ACCORDION_TITLES;
 
 const SingleFilterAccordion = ({ filterCategoryName, filterCategoryValues }) => {
     // console.log("filterCategoryName:::", filterCategoryName);
@@ -23,7 +26,7 @@ const SingleFilterAccordion = ({ filterCategoryName, filterCategoryValues }) => 
                     },
                 }}
             >
-                <Typography variant="h6">{filterCategoryName}</Typography>
+                <Typography variant="h6">{FILTER_ACCORDION_TITLES[filterCategoryName]}</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ pt: 0, pb: 0 }}>
                 <FormGroup>

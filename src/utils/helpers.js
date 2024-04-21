@@ -28,7 +28,7 @@ export const createCategoryAndBrandsSearchString = (categoryValue, brandValues) 
 };
 
 export const extractUniqueValuesFromArray = (data, filteringParam) => {
-    return [...new Set(data.map((dataItem) => dataItem[filteringParam]))];
+    return [...new Set(data.map((dataItem) => dataItem[filteringParam]))].sort();
 };
 
 export const generateFilteringData = (categoriesData, categoryAndBrandsResult, urlBrandValues) => {
@@ -43,6 +43,7 @@ export const generateFilteringData = (categoriesData, categoryAndBrandsResult, u
         "battery_size",
         "battery_type",
         "body",
+        "colors",
         "chipset",
         "device_imgs",
         "device_name",
@@ -68,15 +69,19 @@ export const generateFilteringData = (categoriesData, categoryAndBrandsResult, u
 
     const allFilterNames =
         categoryAndBrandsResult?.[0] &&
-        Object.keys(categoryAndBrandsResult[0]).filter((dataItem) => !exceptionsFilterCategories.includes(dataItem));
-
+        Object.keys(categoryAndBrandsResult[0])
+            .filter((dataItem) => !exceptionsFilterCategories.includes(dataItem))
+            .sort();
+    // const allFilterNames = allFilterNamesTemp;
+    console.log("allFilterNames", allFilterNames);
     allFilterNames?.forEach((filterKey, index) => {
         const filterName = allFilterNames[index];
-        let filterValues = [...new Set(categoryAndBrandsResult.map((dataItem) => dataItem[filterName]))];
+        let filterValues = [...new Set(categoryAndBrandsResult.map((dataItem) => dataItem[filterName]))].sort();
+        console.log("filterValues", filterValues);
         const isArraysInsideArray = filterValues.some((filterValue) => Array.isArray(filterValue));
         if (isArraysInsideArray) {
             // destructuring all arrays into one array, and extract only unique values
-            filterValues = [...new Set(filterValues.reduce((a, b) => [...a, ...b], []))];
+            filterValues = [...new Set(filterValues.reduce((a, b) => [...a, ...b], []))].sort();
         }
         tempObj[filterKey] = filterValues;
     });
