@@ -63,7 +63,7 @@ const CartPage = () => {
                     <Typography variant="subtitle1">{cartTotalQuantity} items</Typography>
                 </Stack>
             </Grid>
-            {!isTabletBreakpoint && <CartOrderSummary isMobileBreakpoint={isMobileBreakpoint} />}
+            {!isTabletBreakpoint && <CartOrderSummaryTitle isMobileBreakpoint={isMobileBreakpoint} />}
 
             <Grid className="cart-items" item xs={12} lg={8}>
                 {cartItems.length === 0 && (
@@ -73,7 +73,7 @@ const CartPage = () => {
                 )}
                 {cartItems.length > 0 && cartItems.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
             </Grid>
-            {isTabletBreakpoint && <CartOrderSummary isMobileBreakpoint={isMobileBreakpoint} />}
+            {isTabletBreakpoint && <CartOrderSummaryTitle isMobileBreakpoint={isMobileBreakpoint} />}
             {/* {!isMobileBreakpoint && <CartOrderSummary isMobileBreakpoint={isMobileBreakpoint} />} */}
             {/* ---Order Summary--- */}
 

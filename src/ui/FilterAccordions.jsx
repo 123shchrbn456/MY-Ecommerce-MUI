@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { useGetFilteringDataFromFirebaseQuery } from "../features/devices/devicesSlice";
 import SingleFilterAccordion from "../features/filter/SingleFilterAccordion";
+import LoadingSkeletons from "./LoadingSkeletons";
 
 const FilterAccordions = () => {
     const [searchParams] = useSearchParams();
@@ -12,9 +13,7 @@ const FilterAccordions = () => {
         urlCategoryValue,
         urlBrandValues,
     });
-    console.log("generatedFilteringDataFromFirebase", generatedFilteringDataFromFirebase);
 
-    // console.log(Object.keys(generatedFilteringDataFromFirebase));
     return (
         <Grid item xs={12} lg={2}>
             {!isLoading ? (
@@ -26,7 +25,7 @@ const FilterAccordions = () => {
                     />
                 ))
             ) : (
-                <div>Loading filters...</div>
+                <LoadingSkeletons needsGridContainer={false} skeletonAmount={5} />
             )}
         </Grid>
     );

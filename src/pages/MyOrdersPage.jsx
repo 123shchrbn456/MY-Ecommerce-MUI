@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import LoadingSkeletons from "../ui/LoadingSkeletons";
 
 const CardAdaptive = styled(Card)(({ theme }) => ({
     padding: "8px",
@@ -87,6 +88,7 @@ const MyOrdersPage = () => {
                 </Stack>
             </Grid>
             <Grid className="cart-items" item xs={12}>
+                {isLoading && <LoadingSkeletons needsGridContainer={false} skeletonAmount={2} />}
                 {!isLoading &&
                     orders.map((order) => (
                         <Accordion defaultExpanded={false} disableGutters={true} sx={{ bgcolor: "#C0C0C0" }} key={order.id}>

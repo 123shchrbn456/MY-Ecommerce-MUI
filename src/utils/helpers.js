@@ -72,12 +72,9 @@ export const generateFilteringData = (categoriesData, categoryAndBrandsResult, u
         Object.keys(categoryAndBrandsResult[0])
             .filter((dataItem) => !exceptionsFilterCategories.includes(dataItem))
             .sort();
-    // const allFilterNames = allFilterNamesTemp;
-    console.log("allFilterNames", allFilterNames);
     allFilterNames?.forEach((filterKey, index) => {
         const filterName = allFilterNames[index];
         let filterValues = [...new Set(categoryAndBrandsResult.map((dataItem) => dataItem[filterName]))].sort();
-        console.log("filterValues", filterValues);
         const isArraysInsideArray = filterValues.some((filterValue) => Array.isArray(filterValue));
         if (isArraysInsideArray) {
             // destructuring all arrays into one array, and extract only unique values

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton, Typography } from "@mui/material";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { PAGE_SIZE } from "../../utils/constants";
 
@@ -8,6 +8,7 @@ import DevicesOperations from "./DevicesOperations";
 import DeviceItem from "./DeviceItem";
 import { useGetDevicesFromFirebaseQuery } from "./devicesSlice";
 import DevicesPagination from "./DevicesPagination";
+import LoadingSkeletons from "../../ui/LoadingSkeletons";
 
 const DevicesList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -29,15 +30,9 @@ const DevicesList = () => {
         sortParam: searchParams.get("sort"),
     });
 
-    if (isLoading) return <div>Loading....</div>;
+    if (isLoading) return <LoadingSkeletons grid={grid} needsGridContainer={true} skeletonAmount={8} />;
 
     const { devices = null, totalPagesNumber = null } = data;
-
-    // console.log("devices", devices);
-
-    // console.log("Devices:", devices);
-
-    // if (!isLoading) setLast(devices[devices.length - 1]);
 
     const changeGridHandler = (gridNum) => {
         setGrid(gridNum);
@@ -97,8 +92,6 @@ const DevicesList = () => {
         uniqueSearchKeys.forEach((searchKey) => {
             searchObj[searchKey] = searchParams.getAll(searchKey);
         });
-        // console.log("searchObj", searchObj);
-        // console.log(searchObj);
         return searchObj;
     }
 
@@ -111,7 +104,16 @@ const DevicesList = () => {
         <Grid className="devices-list" item xs={12} lg={10} pb={3}>
             <DevicesOperations changeGridHandler={changeGridHandler} />
             <Grid container spacing={1}>
-                {!isLoading && devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
+                {!isLoading && devices.length === 0 && (
+                    <Grid item xs={12}>
+                        <Typography variant="h3" align="center">
+                            No items found
+                        </Typography>
+                    </Grid>
+                )}
+                {!isLoading &&
+                    devices.length > 0 &&
+                    devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
                 <DevicesPagination
                     totalPagesNumber={totalPagesNumber}
                     currentPageNumber={Number(currentPageNumber)}
