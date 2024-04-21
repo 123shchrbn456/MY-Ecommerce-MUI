@@ -13,6 +13,7 @@ import {
 
 import { Box, Button, Card, Divider, Grid, IconButton, Typography, Stack, styled, useMediaQuery, useTheme } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CartOrderSummaryTitle from "../ui/CartOrderSummaryTitle";
 
 const BoxOrderSummary = styled(Box)({
     display: "flex",
@@ -26,6 +27,7 @@ const CartPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isMobileBreakpoint = useMediaQuery(theme.breakpoints.down("sm"));
+    const isTabletBreakpoint = useMediaQuery(theme.breakpoints.down("lg"));
 
     const cartItems = useSelector(selectAllCartItems);
     const cartTotalQuantity = useSelector(selectCartTotalQuantity);
@@ -52,7 +54,7 @@ const CartPage = () => {
 
     return (
         <Grid container spacing={1} mt={-2} pb={3}>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={8}>
                 <Stack direction="row" alignItems="center" spacing={2}>
                     <IconButton onClick={backButtonClickHandler}>
                         <ArrowBackIcon fontSize="large" />
@@ -61,20 +63,22 @@ const CartPage = () => {
                     <Typography variant="subtitle1">{cartTotalQuantity} items</Typography>
                 </Stack>
             </Grid>
+            {!isTabletBreakpoint && <CartOrderSummary isMobileBreakpoint={isMobileBreakpoint} />}
+
             <Grid className="cart-items" item xs={12} lg={8}>
+                {cartItems.length === 0 && (
+                    <Typography variant="h3" align="center">
+                        Your Cart is empty
+                    </Typography>
+                )}
                 {cartItems.length > 0 && cartItems.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
             </Grid>
+            {isTabletBreakpoint && <CartOrderSummary isMobileBreakpoint={isMobileBreakpoint} />}
+            {/* {!isMobileBreakpoint && <CartOrderSummary isMobileBreakpoint={isMobileBreakpoint} />} */}
             {/* ---Order Summary--- */}
+
             <Grid item xs={12} lg={4}>
-                <Card sx={{ p: 2 }}>
-                    <Typography
-                        component={isMobileBreakpoint ? "h6" : "h4"}
-                        variant={isMobileBreakpoint ? "h6" : "h4"}
-                        align="center"
-                        mb={1}
-                    >
-                        Order Summary
-                    </Typography>
+                <Card sx={{ p: 2, pt: 1 }}>
                     <BoxOrderSummary>
                         <Typography component="h6" variant={isMobileBreakpoint ? "subtitle1" : "h6"} fontWeight={500}>
                             Product total:

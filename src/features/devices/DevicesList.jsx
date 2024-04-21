@@ -112,11 +112,11 @@ const DevicesList = () => {
             <DevicesOperations changeGridHandler={changeGridHandler} />
             <Grid container spacing={1}>
                 {!isLoading && devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
-                {/* <DevicesPagination
+                <DevicesPagination
                     totalPagesNumber={totalPagesNumber}
                     currentPageNumber={Number(currentPageNumber)}
                     pageChangeHandler={pageChangeHandler}
-                /> */}
+                />
             </Grid>
         </Grid>
     );
