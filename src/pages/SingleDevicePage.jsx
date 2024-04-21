@@ -67,13 +67,20 @@ const SingleDevicePage = () => {
 
     if (isLoading) return <h3>Loading Single Device</h3>;
 
-    const { category, brand, series, model, storage, color, imgURLs, price } = data;
-    const images = imgURLs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
+    console.log(data);
+
+    const { category, brand, series, device_name, memory, color, avatar_img, device_imgs, price } = data;
+    const images = device_imgs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
+
+    // const { category, brand, series, model, storage, color, imgURLs, price } = data;
+    // const images = imgURLs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
 
     console.log("SingleDevicePage", data);
 
     const onBuyClick = () => {
-        dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
+        const name = brand + " " + device_name;
+        // dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
+        dispatch(addToCart({ name: name, id, storage: memory, img: avatar_img, color, price }));
     };
 
     return (
@@ -92,7 +99,8 @@ const SingleDevicePage = () => {
                             {series} series
                         </Link>
                         <Typography color="text.primary">
-                            {model} {storage} {color}
+                            {/* {model} {storage} {color} */}
+                            {device_name} {memory} {color}
                         </Typography>
                     </Breadcrumbs>
                 </Stack>
@@ -103,7 +111,8 @@ const SingleDevicePage = () => {
                     <Card elevation={2} sx={{ p: 1, pl: 3, pr: 3, mb: 1 }} square={true}>
                         <CardContentCustomized>
                             <Typography component="h4" variant="h4">
-                                {model} {storage} {color}
+                                {/* {model} {storage} {color} */}
+                                {device_name} {memory} {color}
                                 {/* iPhone 14 128GB Red */}
                             </Typography>
                         </CardContentCustomized>
@@ -126,7 +135,8 @@ const SingleDevicePage = () => {
                         <Card elevation={2} sx={{ p: 1, pl: 3, pr: 3, mb: 1 }} square={true}>
                             <CardContentCustomized>
                                 <Typography component="h4" variant="h4">
-                                    {model} {storage} {color}
+                                    {/* {model} {storage} {color} */}
+                                    {device_name} {memory} {color}
                                 </Typography>
                             </CardContentCustomized>
                         </Card>
@@ -158,7 +168,7 @@ const SingleDevicePage = () => {
                     <Card elevation={2} sx={{ p: 1, pl: 3, pr: 3, mb: 1 }} square={true}>
                         <CardContentCustomized needmobilechange="false" sx={{ justifyContent: "space-between", gap: 1 }}>
                             <Typography component="h4" variant="h4">
-                                {price}
+                                {price} $
                             </Typography>
 
                             <div>

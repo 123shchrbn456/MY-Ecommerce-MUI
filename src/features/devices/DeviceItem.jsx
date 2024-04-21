@@ -40,8 +40,9 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
     const { id, avatar_img, brand, device_name, memory, price, title_color } = deviceData;
 
     const onBuyClick = () => {
+        const name = brand + " " + device_name;
         // dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
-        dispatch(addToCart({ name: device_name, id, storage: memory, img: avatar_img, color: title_color, price }));
+        dispatch(addToCart({ name: name, id, storage: memory, img: avatar_img, color: title_color, price }));
     };
 
     return (
