@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 import { addDoc, collection, getDocs, orderBy, query, serverTimestamp, where } from "firebase/firestore";
 import { db } from "../../firebase";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const cartApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -21,21 +21,21 @@ export const cartApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: [{ type: "PersonalOrders" }],
         }),
         getUserOrders: builder.query({
-            async queryFn() {
+            async queryFn(userId) {
                 try {
                     const auth = await getAuth();
                     const ordersRef = collection(db, "orders");
-                    // const q = query(ordersRef, where("userRef", "==", auth.currentUser.uid), orderBy("timestamp", "desc"));
-                    const q = query(ordersRef, where("userRef", "==", auth.currentUser.uid), orderBy("timestamp", "asc"));
+                    // const q = query(ordersRef, where("userRef", "==", auth.currentUser.uid), orderBy("timestamp", "asc"));
+                    const q = query(ordersRef, where("userRef", "==", userId), orderBy("timestamp", "asc"));
                     const querySnap = await getDocs(q);
                     let orders = [];
                     querySnap.forEach((doc) => {
                         orders.push({ id: doc.id, ...doc.data(), timestamp: doc.data().timestamp?.seconds });
                     });
 
-                    console.log(orders);
                     return { data: orders };
                 } catch (err) {
+                    console.log(err);
                     throw new Error(err);
                 }
             },

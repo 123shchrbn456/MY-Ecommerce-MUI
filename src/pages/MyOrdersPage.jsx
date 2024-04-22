@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetUserOrdersQuery } from "../features/cart/cartSlice";
 
@@ -6,17 +6,24 @@ import { Grid, IconButton, Typography, Stack } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LoadingSkeletons from "../ui/LoadingSkeletons";
 import MySingleOrder from "../features/authentication/MySingleOrder";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const MyOrdersPage = () => {
     const navigate = useNavigate();
+    const [userId, setUserId] = useState("");
+    const auth = getAuth();
 
-    const { data: orders, isLoading, isFetching, isSuccess, isUninitialized } = useGetUserOrdersQuery();
-    console.log("orders", orders);
-    console.log("isLoading", isLoading);
-    console.log("isFetching", isFetching);
-    console.log("isSuccess", isSuccess);
-    console.log("isUninitialized", isUninitialized);
-    console.log("------------------------------------------------------------");
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserId(user.uid);
+            } else {
+                setUserId("");
+            }
+        });
+    }, [auth]);
+
+    const { data: orders, isLoading, isSuccess } = useGetUserOrdersQuery(userId);
 
     const backButtonClickHandler = () => navigate(-1);
 
