@@ -7,6 +7,7 @@ import Link from "@mui/material/Link";
 import { usePopupState, bindHover, bindFocus, bindMenu } from "material-ui-popup-state/hooks";
 import { Box, Paper, Typography, styled } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SingleCascadingHoverMenus from "./SingleCascadingHoverMenus";
 
 const BrandButton = styled(Button)(() => ({
     "&:hover": {
@@ -68,7 +69,9 @@ function CascadingSubmenu({ title, popupId, ...props }) {
             <MenuItem {...bindHover(popupState)} {...bindFocus(popupState)}>
                 {/* <span sx={classes.title}>{title}</span> */}
                 {/* My decision to switch to Button */}
-                <BrandButton sx={classes.title}>{title}</BrandButton>
+                <BrandButton sx={classes.title} to="/devices?category=tablets&_page=1">
+                    {title}
+                </BrandButton>
                 <ChevronRight sx={classes.moreArrow} />
             </MenuItem>
             <CascadingMenu
@@ -109,76 +112,20 @@ const CascadingHoverMenus = () => {
 
     const popupState2 = usePopupState({
         popupId: "demoMenu2",
-        variant: "popover2",
+        variant: "popover",
     });
 
     const popupState3 = usePopupState({
         popupId: "demoMenu3",
-        variant: "popover3",
+        variant: "popover",
     });
 
     return (
         <>
             {/* --- POPUP1 START --- */}
-            <Button
-                variant="contained"
-                {...bindHover(popupState)}
-                {...bindFocus(popupState)}
-                to="/devices?category=smartphones&_page=1"
-                onClick={(e) => {
-                    popupState.close(e);
-                }}
-                endIcon={<ArrowDropDownIcon fontSize="medium" />}
-            >
-                Smartphones
-            </Button>
-            <CascadingMenu
-                popupState={popupState}
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                transformOrigin={{ vertical: "top", horizontal: "left" }}
-            >
-                {/* Submenus */}
-                <CascadingSubmenu popupId="moreChoicesCascadingMenu" title="Apple">
-                    <CascadingMenuItem>
-                        <SeriesButton to="/smartphones?series=15pro&_page=1">15 Pro Series</SeriesButton>
-                    </CascadingMenuItem>
-
-                    <CascadingMenuItem>
-                        <SeriesButton to="/smartphones?series=15&_page=1">15 Series</SeriesButton>
-                    </CascadingMenuItem>
-
-                    <CascadingMenuItem>
-                        <SeriesButton to="/smartphones?series=14pro&_page=1">14 Pro Series</SeriesButton>
-                    </CascadingMenuItem>
-                </CascadingSubmenu>
-                <CascadingSubmenu popupId="moreChoicesCascadingMenu2" title="Samsung">
-                    <CascadingMenuItem>
-                        <SeriesButton to="/">Galaxy S Series</SeriesButton>
-                    </CascadingMenuItem>
-
-                    <CascadingMenuItem>
-                        <SeriesButton to="/">Galaxy A Series</SeriesButton>
-                    </CascadingMenuItem>
-
-                    <CascadingMenuItem>
-                        <SeriesButton to="/">Galaxy Fold Series</SeriesButton>
-                    </CascadingMenuItem>
-                </CascadingSubmenu>
-                <CascadingSubmenu popupId="moreChoicesCascadingMenu3" title="Google">
-                    <CascadingMenuItem>
-                        <SeriesButton to="/">Pixel 8 Series</SeriesButton>
-                    </CascadingMenuItem>
-                    <CascadingMenuItem>
-                        <SeriesButton to="/">Pixel 7 Series</SeriesButton>
-                    </CascadingMenuItem>
-                    <CascadingMenuItem>
-                        <SeriesButton to="/">Pixel 6 Series</SeriesButton>
-                    </CascadingMenuItem>
-                </CascadingSubmenu>
-            </CascadingMenu>
+            <SingleCascadingHoverMenus />
             {/* --- POPUP1 FINISH --- */}
-            {/* --- POPUP1 FINISH --- */}
-            {/* --- POPUP1 FINISH --- */}
+
             {/* ------------------------------------------------------------------------------ */}
             {/* --- POPUP2 START --- */}
             {/* --- POPUP2 START --- */}

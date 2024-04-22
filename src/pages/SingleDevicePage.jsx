@@ -89,13 +89,17 @@ const SingleDevicePage = () => {
             <Grid item xs={12}>
                 <Stack>
                     <Breadcrumbs aria-label="breadcrumb">
-                        <Link underline="hover" color="inherit" to={`/devices?category=${category}`}>
+                        <Link underline="hover" color="inherit" to={`/devices?category=${category}&_page=1`}>
                             {category}
                         </Link>
-                        <Link underline="hover" color="inherit" to={`/devices?category=${category}&brand=${brand}`}>
+                        <Link underline="hover" color="inherit" to={`/devices?category=${category}&brand=${brand}&_page=1`}>
                             {brand}
                         </Link>
-                        <Link underline="hover" color="inherit" to={`/devices?category=${category}&brand=${brand}&series=${series}`}>
+                        <Link
+                            underline="hover"
+                            color="inherit"
+                            to={`/devices?category=${category}&brand=${brand}&series=${series}&_page=1`}
+                        >
                             {series} series
                         </Link>
                         <Typography color="text.primary">
