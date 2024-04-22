@@ -1,4 +1,3 @@
-import React from "react";
 import HoverMenu from "material-ui-popup-state/HoverMenu";
 import MenuItem from "@mui/material/MenuItem";
 import ChevronRight from "@mui/icons-material/ChevronRight";
@@ -101,48 +100,9 @@ function CascadingMenu({ popupState, ...props }) {
     );
 }
 
-const SingleCascadingHoverMenus = () => {
-    let popupId = "demoMenu";
-    let linkCategory = "smartphones";
-    let categoryTitle = "Smartphones";
-    const submenuOptions = [
-        {
-            cascadingId: "moreChoicesCascadingMenu",
-            title: "Apple",
-            titleLink: `/devices?category=${linkCategory}&brand=Apple&_page=1`,
-            series: [
-                {
-                    seriesTitle: "15 Pro Series",
-                    seriesLink: `/devices?category=${linkCategory}&brand=Apple&series=iPhone%2015%20Pro%20Max&_page=1`,
-                },
-                { seriesTitle: "14 Series", seriesLink: `/devices?category=${linkCategory}&brand=Apple&series=iPhone+14&_page=1` },
-                { seriesTitle: "13 Series", seriesLink: `/devices?category=${linkCategory}&brand=Apple&series=iPhone+13&_page=1` },
-            ],
-        },
-        {
-            cascadingId: "moreChoicesCascadingMenu2",
-            title: "Samsung",
-            titleLink: `/devices?category=${linkCategory}&brand=Samsung&_page=1`,
-            series: [
-                {
-                    seriesTitle: "Galaxy A55",
-                    seriesLink: `/devices?category=${linkCategory}&_page=1&brand=Samsung&series=Galaxy+A55`,
-                },
-                { seriesTitle: "Galaxy S23", seriesLink: `/devices?category=${linkCategory}&_page=1&brand=Samsung&series=Galaxy+S23` },
-                {
-                    seriesTitle: "Galaxy S24",
-                    seriesLink: `http://localhost:5173/devices?category=${linkCategory}&_page=1&brand=Samsung&series=Galaxy+S24`,
-                },
-                {
-                    seriesTitle: "Galaxy S24 Ultra",
-                    seriesLink: `http://localhost:5173/devices?category=${linkCategory}&_page=1&brand=Samsung&series=Galaxy+S24+Ultra`,
-                },
-            ],
-        },
-    ];
-
+const SingleCascadingHoverMenus = ({ data }) => {
     const popupState = usePopupState({
-        popupId: popupId,
+        popupId: data.popupId,
         variant: "popover",
     });
     return (
@@ -151,13 +111,13 @@ const SingleCascadingHoverMenus = () => {
                 variant="contained"
                 {...bindHover(popupState)}
                 {...bindFocus(popupState)}
-                to={`/devices?category=${linkCategory}&_page=1`}
+                to={`/devices?category=${data.linkCategory}&_page=1`}
                 onClick={(e) => {
                     popupState.close(e);
                 }}
                 endIcon={<ArrowDropDownIcon fontSize="medium" />}
             >
-                {categoryTitle}
+                {data.categoryTitle}
             </Button>
             <CascadingMenu
                 popupState={popupState}
@@ -165,15 +125,15 @@ const SingleCascadingHoverMenus = () => {
                 transformOrigin={{ vertical: "top", horizontal: "left" }}
             >
                 {/* Submenus */}
-                {submenuOptions.map((submenuOption, index) => (
+                {data.submenuOptions.map((submenuOption, index) => (
                     <CascadingSubmenu
-                        key={index}
+                        key={submenuOption.title}
                         popupId={`moreChoicesCascadingMenu${index}`}
                         title={submenuOption.title}
                         titleLink={submenuOption.titleLink}
                     >
                         {submenuOption.series.map((singleSeries) => (
-                            <CascadingMenuItem>
+                            <CascadingMenuItem key={singleSeries.seriesTitle}>
                                 <SeriesButton to={singleSeries.seriesLink}>{singleSeries.seriesTitle}</SeriesButton>
                             </CascadingMenuItem>
                         ))}
