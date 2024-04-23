@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import ImageGallery from "react-image-gallery";
 import {
@@ -24,6 +24,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { addToCart } from "../features/cart/cartSlice";
+import ModalAlert from "../ui/ModalAlert";
 
 const RoundButton = styled(Button)(({ back }) => ({
     borderRadius: "50%",
@@ -58,12 +59,13 @@ const CardContentCustomized = styled(CardContent)(({ theme, needmobilechange = "
 }));
 
 const SingleDevicePage = () => {
+    const [openAlertModal, setOpenAlertModal] = useState(false);
     const theme = useTheme();
     const dispatch = useDispatch();
     const { id } = useParams();
 
     const isThinnerThanLarge = useMediaQuery(theme.breakpoints.down("lg"));
-    const { data = {}, isSuccess, isLoading, isError } = useGetSingleDeviceFromFirebaseQuery(id);
+    const { data = {}, isLoading } = useGetSingleDeviceFromFirebaseQuery(id);
 
     if (isLoading) return <h3>Loading Single Device</h3>;
 
@@ -72,15 +74,19 @@ const SingleDevicePage = () => {
     const { category, brand, series, device_name, memory, color, avatar_img, device_imgs, price } = data;
     const images = device_imgs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
 
-    // const { category, brand, series, model, storage, color, imgURLs, price } = data;
-    // const images = imgURLs.map((imgURL) => ({ original: imgURL, thumbnail: imgURL }));
-
     console.log("SingleDevicePage", data);
 
     const onBuyClick = () => {
         const name = brand + " " + device_name;
-        // dispatch(addToCart({ name: model, id, storage, img: imgURLs[0], color, price }));
         dispatch(addToCart({ name: name, id, storage: memory, img: avatar_img, color, price }));
+    };
+
+    const handleOpenAlertModal = () => {
+        setOpenAlertModal(true);
+    };
+
+    const handleCloseAlertModal = () => {
+        setOpenAlertModal(false);
     };
 
     return (
@@ -90,7 +96,7 @@ const SingleDevicePage = () => {
                 <Stack>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link underline="hover" color="inherit" to={`/devices?category=${category}&_page=1`}>
-                            {category}
+                            {category.charAt(0).toUpperCase() + category.slice(1)}
                         </Link>
                         <Link underline="hover" color="inherit" to={`/devices?category=${category}&brand=${brand}&_page=1`}>
                             {brand}
@@ -150,7 +156,7 @@ const SingleDevicePage = () => {
                             <Typography component="h6" variant="h6" sx={{ mr: 2 }}>
                                 Storage options:
                             </Typography>
-                            <ButtonGroup variant="outlined" aria-label="Basic button group">
+                            <ButtonGroup variant="outlined" aria-label="Basic button group" onClick={handleOpenAlertModal}>
                                 <Button>256GB</Button>
                                 <Button>512GB</Button>
                                 <Button>1024GB</Button>
@@ -163,9 +169,9 @@ const SingleDevicePage = () => {
                                 Colors:
                             </Typography>
                             <div>
-                                <RoundButton back="red"></RoundButton>
-                                <RoundButton back="black"></RoundButton>
-                                <RoundButton back="yellow"></RoundButton>
+                                <RoundButton back="red" onClick={handleOpenAlertModal}></RoundButton>
+                                <RoundButton back="black" onClick={handleOpenAlertModal}></RoundButton>
+                                <RoundButton back="yellow" onClick={handleOpenAlertModal}></RoundButton>
                             </div>
                         </CardContentCustomized>
                     </Card>
@@ -176,13 +182,13 @@ const SingleDevicePage = () => {
                             </Typography>
 
                             <div>
-                                <IconButton aria-label="add to favorites" size="large">
+                                <IconButton aria-label="add to favorites" size="large" onClick={handleOpenAlertModal}>
                                     <FavoriteIcon />
                                 </IconButton>
-                                <IconButton aria-label="add to commparison" size="large">
+                                <IconButton aria-label="add to commparison" size="large" onClick={handleOpenAlertModal}>
                                     <BalanceIcon />
                                 </IconButton>
-                                <IconButton aria-label="share" size="large">
+                                <IconButton aria-label="share" size="large" onClick={handleOpenAlertModal}>
                                     <ShareIcon />
                                 </IconButton>
                             </div>
@@ -201,6 +207,7 @@ const SingleDevicePage = () => {
                     </Card>
                 </Grid>
             </Grid>
+            <ModalAlert openAlertModal={openAlertModal} handleCloseAlertModal={handleCloseAlertModal} />
         </Grid>
     );
 };

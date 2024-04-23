@@ -33,7 +33,7 @@ const LinkCustomized = styled(Link)({
     color: "black",
 });
 
-const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }) => {
+const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData, handleOpenAlertModal }) => {
     const dispatch = useDispatch();
     const { xs, sm, md, lg, xl } = grid;
     // const { id, brand, model, color, imgURLs, price, storage } = deviceData;
@@ -89,13 +89,13 @@ const DeviceItem = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, deviceData }
                         Buy
                     </Button>
                     <Box mt={1} mb={1} ml={0}>
-                        <IconButton aria-label="add to favorites" size="small">
+                        <IconButton aria-label="add to favorites" size="small" onClick={handleOpenAlertModal}>
                             <FavoriteIcon />
                         </IconButton>
-                        <IconButton aria-label="add to commparison" size="small">
+                        <IconButton aria-label="add to commparison" size="small" onClick={handleOpenAlertModal}>
                             <BalanceIcon />
                         </IconButton>
-                        <IconButton aria-label="share" size="small">
+                        <IconButton aria-label="share" size="small" onClick={handleOpenAlertModal}>
                             <ShareIcon />
                         </IconButton>
                     </Box>

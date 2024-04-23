@@ -9,10 +9,12 @@ import DeviceItem from "./DeviceItem";
 import { useGetDevicesFromFirebaseQuery } from "./devicesSlice";
 import DevicesPagination from "./DevicesPagination";
 import LoadingSkeletons from "../../ui/LoadingSkeletons";
+import ModalAlert from "../../ui/ModalAlert";
 
 const DevicesList = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
     const [grid, setGrid] = useState({ xs: 6, sm: 6, md: 4, lg: 4, xl: 3 });
+    const [openAlertModal, setOpenAlertModal] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const currentPageNumber = searchParams.get("_page");
 
@@ -22,6 +24,14 @@ const DevicesList = () => {
             setSearchParams(searchParams);
         }
     }, []);
+
+    const handleOpenAlertModal = () => {
+        setOpenAlertModal(true);
+    };
+
+    const handleCloseAlertModal = () => {
+        setOpenAlertModal(false);
+    };
 
     const { data, isLoading, isSuccess } = useGetDevicesFromFirebaseQuery({
         uniqueSearchParamsObj: createUniqueSearchParamsObj(),
@@ -113,12 +123,15 @@ const DevicesList = () => {
                 )}
                 {!isLoading &&
                     devices.length > 0 &&
-                    devices.map((deviceData, index) => <DeviceItem key={index} grid={grid} deviceData={deviceData} />)}
+                    devices.map((deviceData, index) => (
+                        <DeviceItem key={index} grid={grid} deviceData={deviceData} handleOpenAlertModal={handleOpenAlertModal} />
+                    ))}
                 <DevicesPagination
                     totalPagesNumber={totalPagesNumber}
                     currentPageNumber={Number(currentPageNumber)}
                     pageChangeHandler={pageChangeHandler}
                 />
+                <ModalAlert openAlertModal={openAlertModal} handleCloseAlertModal={handleCloseAlertModal} />
             </Grid>
         </Grid>
     );
