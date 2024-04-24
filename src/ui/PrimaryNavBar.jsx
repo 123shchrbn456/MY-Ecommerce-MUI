@@ -24,6 +24,7 @@ import LoginIcon from "@mui/icons-material/Login";
 // import companyLogo from "../images/logo-Meta-removebg-preview.png";
 import companyLogo from "../images/logo-no-background.png";
 import { getTotalPriceAndQuantity, selectAllCartItems, selectCartTotalQuantity } from "../features/cart/cartSlice";
+import ModalAlert from "./ModalAlert";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -61,6 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const PrimaryNavBar = () => {
+    const [openAlertModal, setOpenAlertModal] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const auth = getAuth();
@@ -98,6 +100,14 @@ const PrimaryNavBar = () => {
         console.log("Sign out is successful");
         auth.signOut();
         // navigate("/devices?category=smartphones&_page=1");
+    };
+
+    const handleOpenAlertModal = () => {
+        setOpenAlertModal(true);
+    };
+
+    const handleCloseAlertModal = () => {
+        setOpenAlertModal(false);
     };
 
     const menuId = "primary-search-account-menu";
@@ -145,7 +155,11 @@ const PrimaryNavBar = () => {
                             <SearchIconWrapper size="large">
                                 <SearchIcon size="large" />
                             </SearchIconWrapper>
-                            <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+                            <StyledInputBase
+                                placeholder="Search…"
+                                inputProps={{ "aria-label": "search" }}
+                                onChange={handleOpenAlertModal}
+                            />
                         </Search>
                         <Box
                             sx={{
@@ -206,6 +220,7 @@ const PrimaryNavBar = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
+            <ModalAlert openAlertModal={openAlertModal} handleCloseAlertModal={handleCloseAlertModal} />
         </Box>
     );
 };
