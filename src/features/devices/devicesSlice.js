@@ -5,16 +5,6 @@ import { and, collection, getCountFromServer, getDocs, limit, or, orderBy, query
 
 export const devicesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getDevices: builder.query({
-            query: (searchParams) => `/merchandise-improved${searchParams}`,
-            transformResponse(response, meta) {
-                return { devices: response, totalCount: Number(meta.response.headers.get("X-Total-Count")) };
-            },
-            providesTags: (result, error, arg) => [
-                { type: "Devices", id: "LIST" },
-                ...result.devices.map((item) => ({ type: "Devices", id: item.id })),
-            ],
-        }),
         getDevicesFromFirebase: builder.query({
             async queryFn({ uniqueSearchParamsObj, pageNum, pageSize, sortParam }) {
                 const sort = sortParam === null ? "popularity_desc" : sortParam;
@@ -70,22 +60,7 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
             providesTags: [{ type: "Devices" }],
             keepUnusedDataFor: 3600,
         }),
-        getFilteringData: builder.query({
-            async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
-                const categoriesResult = await fetchWithBQ(`/merchandise-improved?category=${_arg.category}`);
-                const categoryAndBrandsResult = await fetchWithBQ(`/merchandise-improved${_arg.categoryAndBrandsString}`);
-                const filterCategoriesAndValues = generateFilteringData(
-                    categoriesResult.data,
-                    categoryAndBrandsResult.data,
-                    _arg.urlBrandValues
-                );
-                let res = {
-                    ...categoryAndBrandsResult /* сохранили свойство meta */,
-                    data: { ...filterCategoriesAndValues },
-                };
-                return res;
-            },
-        }),
+
         getFilteringDataFromFirebase: builder.query({
             async queryFn({ urlCategoryValue, urlBrandValues = [] }) {
                 try {
@@ -119,14 +94,7 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
             providesTags: [{ type: "FilteringValues" }],
             keepUnusedDataFor: 3600,
         }),
-        getSingleDevice: builder.query({
-            query: (singleGoodsId) => `/merchandise-improved?id=${singleGoodsId}`,
-            transformResponse: (responseDataArr) => {
-                const [singleObj] = responseDataArr;
-                return { ...singleObj };
-            },
-            providesTags: (result, error, arg) => [{ type: "Devices", id: arg }],
-        }),
+
         getSingleDeviceFromFirebase: builder.query({
             async queryFn(id) {
                 //
@@ -158,11 +126,5 @@ export const devicesApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const {
-    useGetDevicesQuery,
-    useGetSingleDeviceQuery,
-    useGetFilteringDataQuery,
-    useGetDevicesFromFirebaseQuery,
-    useGetFilteringDataFromFirebaseQuery,
-    useGetSingleDeviceFromFirebaseQuery,
-} = devicesApiSlice;
+export const { useGetDevicesFromFirebaseQuery, useGetFilteringDataFromFirebaseQuery, useGetSingleDeviceFromFirebaseQuery } =
+    devicesApiSlice;

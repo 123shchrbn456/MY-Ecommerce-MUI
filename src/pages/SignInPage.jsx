@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSignInMutation } from "../features/authentication/authenticationSlice";
-import { Button, Divider, TextField, FormControlLabel, Checkbox, Grid, Box, Typography, Container, Stack } from "@mui/material";
+import { Button, Divider, TextField, Grid, Box, Typography, Container, Stack } from "@mui/material";
 
 export default function SignInPage() {
     const navigate = useNavigate();
 
-    const [signIn, { isLoading, isError }] = useSignInMutation();
+    const [signIn, { isError }] = useSignInMutation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();

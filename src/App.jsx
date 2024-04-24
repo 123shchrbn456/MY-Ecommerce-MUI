@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { Link as RouterLink, BrowserRouter, Routes, Route } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { blueGrey, deepOrange, grey, yellow } from "@mui/material/colors";
 import AppLayout from "./ui/AppLayout";
-import Contact from "./pages/Contact";
 import About from "./pages/About";
 import HomePage from "./pages/HomePage";
 import DevicesPage from "./pages/DevicesPage";
@@ -47,7 +45,6 @@ function Router(props) {
         return <StaticRouter location="/">{children}</StaticRouter>;
     }
 
-    // return <MemoryRouter>{children}</MemoryRouter>;
     return <BrowserRouter>{children}</BrowserRouter>;
 }
 
@@ -67,13 +64,6 @@ const theme = createTheme({
         },
     },
     palette: {
-        /* primary: {
-            // main: grey[700],
-            // dark: grey[900],
-            main: "#7B1FA2",
-            dark: blueGrey[800],
-            // contrastText: "#fff",
-        }, */
         primary: {
             main: "#48484e",
         },
@@ -83,11 +73,6 @@ const theme = createTheme({
         background: {
             // paper: "#CFD8DC",
         },
-        // secondary: {
-        //     main: deepOrange[700],
-        //     dark: deepOrange[900],
-        //     contrastText: deepOrange[50],
-        // },
     },
     components: {
         // MUI Link behaviour is changed to RouterLink behaviour

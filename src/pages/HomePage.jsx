@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardActionArea, CardMedia, Grid, Typography, styled } from "@mui/material";
+import { Card, CardActionArea, CardMedia, Grid, Typography, styled } from "@mui/material";
 import DeviceItem from "../features/devices/DeviceItem";
 
 import ipadBanner from "../images/ipad_banner.jpeg";
@@ -81,43 +81,7 @@ const HomePage = () => {
             </Grid>
             {/* Popular items */}
             {!isLoading && popularFirstPartDevices.map((deviceData) => <DeviceItem grid={DEVICE_GRID} deviceData={deviceData} />)}
-            {/* <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
-                <CardCustomized elevation={2} sx={{ p: 2 }}>
-                    <CardActionArea className="my-card-action-area" to="/devices/123">
-                        <CardMedia
-                            sx={{ height: { xs: 150, sm: 250 }, objectFit: "contain" }}
-                            image={iphone15Img}
-                            title="stuff"
-                            component="img"
-                        />
-                    </CardActionArea>
-                    <CardContent sx={{ p: 1, pb: 0 }}>
-                        <LinkCustomized to="/devices/123">
-                            <Typography component="h6" variant="subtitle1">
-                                iPhone 14 128GB Red
-                            </Typography>
-                        </LinkCustomized>
 
-                        <Typography component="h5" variant="h5">
-                            900 $
-                        </Typography>
-                    </CardContent>
-                    <CardActions sx={{ p: 1, justifyContent: "space-between" }}>
-                        <Button variant="contained">Buy</Button>
-                        <div>
-                            <IconButton aria-label="add to favorites">
-                                <FavoriteIcon />
-                            </IconButton>
-                            <IconButton aria-label="add to commparison">
-                                <BalanceIcon />
-                            </IconButton>
-                            <IconButton aria-label="share">
-                                <ShareIcon />
-                            </IconButton>
-                        </div>
-                    </CardActions>
-                </CardCustomized>
-            </Grid> */}
             {/* Advertisement Card */}
             <Grid item xs={12} md={6}>
                 <CardCustomized elevation={2} sx={{ p: 3 }}>
@@ -153,9 +117,7 @@ const HomePage = () => {
                 </CardCustomized>
             </Grid>
             {/* Popular items */}
-            {/* Popular items */}
             {!isLoading && popularSecondPartDevices.map((deviceData) => <DeviceItem grid={DEVICE_GRID} deviceData={deviceData} />)}
-            {/* <Grid item xs={12}></Grid> */}
         </Grid>
     );
 };

@@ -1,24 +1,8 @@
-import { Box, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, styled } from "@mui/material";
+import { Box, Link, Typography, styled } from "@mui/material";
 import SmartphoneIcon from "@mui/icons-material/Smartphone";
 import TabletMacIcon from "@mui/icons-material/TabletMac";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import React from "react";
-
-const CustomizedListItem = styled(ListItem)({
-    display: "inline-flex",
-    width: "25%",
-});
-
-const CustomizedLink2 = styled(Link)({
-    display: "inline-flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0 0px",
-    // margin: { xs: 0, sm: 0, md: "0 30px", lg: "0 30px" },
-    margin: { md: "20px" },
-    // margin: "30px",
-});
 
 const CustomizedLink = styled(Link)(({ theme }) => ({
     display: "inline-flex",

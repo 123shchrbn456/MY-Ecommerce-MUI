@@ -1,12 +1,9 @@
 import styled from "@emotion/styled";
-import { Grid, List, ListItemText, Typography, Button, Stack, Container, TextField } from "@mui/material";
+import { Grid, List, ListItemText, Typography, Container, TextField } from "@mui/material";
 import { Box } from "@mui/system";
-// import { Colors } from "../../styles/theme";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-// import { SubscribeTf, FooterTitle } from "../../styles/footer";
-import SendIcon from "@mui/icons-material/Send";
 
 export const FooterTitle = styled(Typography)(() => ({
     textTransform: "uppercase",

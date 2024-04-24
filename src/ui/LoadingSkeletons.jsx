@@ -20,9 +20,7 @@ const LoadingSkeletons = ({ grid = { xs: 6, sm: 6, md: 4, lg: 4, xl: 3 }, needsG
     return (
         <>
             {new Array(skeletonAmount).fill("").map((_, index) => (
-                // <Grid key={index} item xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
                 <Skeleton key={index} variant="rounded" animation="wave" height={150} sx={{ mb: 1 }} />
-                // </Grid>
             ))}
         </>
     );
