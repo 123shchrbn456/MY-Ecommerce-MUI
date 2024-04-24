@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Grid, Skeleton, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { PAGE_SIZE } from "../../utils/constants";
 

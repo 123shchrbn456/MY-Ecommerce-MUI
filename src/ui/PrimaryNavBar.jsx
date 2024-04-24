@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { AppBar, Box, Button, Toolbar, IconButton, InputBase, Badge, Menu, MenuItem, Container, Link, Avatar } from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    Toolbar,
+    IconButton,
+    InputBase,
+    Badge,
+    Menu,
+    MenuItem,
+    Container,
+    Link,
+    Avatar,
+    Typography,
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 
-import companyLogo from "../images/logo-Meta-removebg-preview.png";
+// import companyLogo from "../images/logo-Meta-removebg-preview.png";
+import companyLogo from "../images/logo-no-background.png";
 import { getTotalPriceAndQuantity, selectAllCartItems, selectCartTotalQuantity } from "../features/cart/cartSlice";
 
 const Search = styled("div")(({ theme }) => ({
@@ -120,7 +135,10 @@ const PrimaryNavBar = () => {
                     <Toolbar disableGutters={true} sx={{ justifyContent: "space-between", flexWrap: { xs: "wrap", sm: "no-wrap" } }}>
                         <Box sx={{ display: { xs: "none", md: "block" } }}>
                             <Link to="/">
-                                <img src={companyLogo} alt="" style={{ height: "40px" }} />
+                                <img src={companyLogo} alt="" style={{ height: "50px" }} />
+                                {/* <Typography variant="h3" color="secondary">
+                                    Devices store
+                                </Typography> */}
                             </Link>
                         </Box>
                         <Search>

@@ -6,7 +6,7 @@ import ipadBanner from "../images/ipad_banner.jpeg";
 import iphoneBanner from "../images/iphone_banner.jpg";
 import mackbookBanner from "../images/mackbook_banner.jpg";
 import laptopsBanner from "../images/laptops_banner.jpg";
-// import moduleName from "../images/";
+import { useGetDevicesFromFirebaseQuery } from "../features/devices/devicesSlice";
 
 const CardCustomized = styled(Card)({
     "&:hover": {
@@ -20,6 +20,20 @@ const CardCustomized = styled(Card)({
 const DEVICE_GRID = { xs: 6, sm: 6, md: 6, lg: 3, xl: 3 };
 
 const HomePage = () => {
+    const {
+        data = {},
+        isLoading,
+        isSuccess,
+    } = useGetDevicesFromFirebaseQuery({
+        uniqueSearchParamsObj: {},
+        pageNum: 1,
+        pageSize: 8,
+        sortParam: null,
+    });
+
+    let popularFirstPartDevices = data.devices?.slice(0, data.devices?.length / 2);
+    let popularSecondPartDevices = data.devices?.slice(data.devices?.length / 2);
+
     return (
         <Grid container spacing={2} pb={3}>
             <Grid item xs={12}>
@@ -33,7 +47,7 @@ const HomePage = () => {
             {/* Advertisement Card */}
             <Grid item xs={12} md={6}>
                 <CardCustomized elevation={4} sx={{ p: 3, pb: 0 }}>
-                    <CardActionArea className="my-card-action-area" to="/devices/123">
+                    <CardActionArea className="my-card-action-area" to="/devices?category=tablets&brand=Apple&_page=1">
                         <Typography variant="button">Buy</Typography>
                         <Typography component="h3" variant="h3">
                             Apple iPad
@@ -51,7 +65,7 @@ const HomePage = () => {
             {/* Advertisement Card */}
             <Grid item xs={12} md={6}>
                 <CardCustomized elevation={2} sx={{ p: 3, pb: 0 }}>
-                    <CardActionArea className="my-card-action-area" to="/devices/123">
+                    <CardActionArea className="my-card-action-area" to="/devices?category=smartphones&brand=Apple&_page=1">
                         <Typography variant="button">Buy</Typography>
                         <Typography component="h3" variant="h3">
                             Apple iPhone
@@ -65,12 +79,8 @@ const HomePage = () => {
                     </CardActionArea>
                 </CardCustomized>
             </Grid>
-
             {/* Popular items */}
-            <DeviceItem grid={DEVICE_GRID} />
-            <DeviceItem grid={DEVICE_GRID} />
-            <DeviceItem grid={DEVICE_GRID} />
-            <DeviceItem grid={DEVICE_GRID} />
+            {!isLoading && popularFirstPartDevices.map((deviceData) => <DeviceItem grid={DEVICE_GRID} deviceData={deviceData} />)}
             {/* <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
                 <CardCustomized elevation={2} sx={{ p: 2 }}>
                     <CardActionArea className="my-card-action-area" to="/devices/123">
@@ -111,7 +121,7 @@ const HomePage = () => {
             {/* Advertisement Card */}
             <Grid item xs={12} md={6}>
                 <CardCustomized elevation={2} sx={{ p: 3 }}>
-                    <CardActionArea className="my-card-action-area" to="/devices/123">
+                    <CardActionArea className="my-card-action-area" to="/devices?category=laptops&brand=Apple&_page=1">
                         <Typography variant="button">Buy</Typography>
                         <Typography component="h3" variant="h3">
                             Apple MacBook
@@ -128,7 +138,7 @@ const HomePage = () => {
             {/* Advertisement Card */}
             <Grid item xs={12} md={6}>
                 <CardCustomized elevation={2} sx={{ p: 3 }}>
-                    <CardActionArea className="my-card-action-area" to="/devices/123">
+                    <CardActionArea className="my-card-action-area" to="/devices?category=laptops&_page=1">
                         <Typography variant="button">Buy</Typography>
                         <Typography component="h3" variant="h3">
                             Laptops
@@ -143,10 +153,8 @@ const HomePage = () => {
                 </CardCustomized>
             </Grid>
             {/* Popular items */}
-            <DeviceItem grid={DEVICE_GRID} />
-            <DeviceItem grid={DEVICE_GRID} />
-            <DeviceItem grid={DEVICE_GRID} />
-            <DeviceItem grid={DEVICE_GRID} />
+            {/* Popular items */}
+            {!isLoading && popularSecondPartDevices.map((deviceData) => <DeviceItem grid={DEVICE_GRID} deviceData={deviceData} />)}
             {/* <Grid item xs={12}></Grid> */}
         </Grid>
     );
