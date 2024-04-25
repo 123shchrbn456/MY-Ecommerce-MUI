@@ -116,7 +116,6 @@ function App() {
                         <Route path="/devices/:id" element={<SingleDevicePage />} />
                         <Route path="/cart" element={<CartPage />} />
                         <Route path="/my-orders" element={<MyOrdersPage />} />
-                        <Route path="/about" element={<About />} />
                         <Route path="/sign-in" element={<SignInPage />} />
                         <Route path="/sign-up" element={<SignUpPage />} />
                     </Route>
