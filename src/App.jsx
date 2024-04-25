@@ -4,7 +4,6 @@ import { Link as RouterLink, BrowserRouter, Routes, Route } from "react-router-d
 import { StaticRouter } from "react-router-dom/server";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppLayout from "./ui/AppLayout";
-import About from "./pages/About";
 import HomePage from "./pages/HomePage";
 import DevicesPage from "./pages/DevicesPage";
 import SingleDevicePage from "./pages/SingleDevicePage";
